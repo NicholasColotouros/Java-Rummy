@@ -4,7 +4,7 @@ Java-Rummy
 A java implementation of the card game Gin-Rummy as part of an optional, ungraded project for COMP 303.
 
 
-##Setup (for working on the project)
+##General Setup (for working on the project)
 
 1. Install git and clone the repository. [Github for Windows](https://windows.github.com/) is a nice tool to use.
 2. Clone the repository either through command line or clicking "Clone to Desktop" on the right if you have github for Windows
