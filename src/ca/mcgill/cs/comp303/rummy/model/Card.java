@@ -70,7 +70,35 @@ public final class Card implements Comparable<Card>
 	 */
 	public int compareTo(Card pCard)
 	{
-		return Integer.MAX_VALUE; // TODO Complete this code.
+		// This card's rank is lower, therefore the other card is better
+		if(aRank.ordinal() < pCard.aRank.ordinal())
+		{
+			return -1;
+		}
+		
+		// This card's rank is higher, therefore the other card is worse
+		else if(aRank.ordinal() < pCard.aRank.ordinal()) 
+		{
+			return 1;
+		}
+		
+		// If both ranks are the same, compare the suits
+		// RECALL: the order of the suits in the enum type are in
+		// ASCENDING ORDER
+		else
+		{
+			if(aSuit.ordinal() < pCard.aSuit.ordinal())
+			{
+				return 1;
+			}
+			
+			else if(aSuit.ordinal() > pCard.aSuit.ordinal())
+			{
+				return -1;
+			}
+			
+			return 0; // The cards are the same
+		}
 	}
 
 	/**
@@ -82,7 +110,14 @@ public final class Card implements Comparable<Card>
 	@Override
 	public boolean equals( Object pCard ) 
 	{
-		return true; // TODO Complete this code.
+		if(this.aRank.equals(((Card)pCard).aRank))
+		{
+			if(this.aSuit.equals(((Card)pCard).aSuit))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/** 
@@ -93,6 +128,7 @@ public final class Card implements Comparable<Card>
 	@Override
 	public int hashCode() 
 	{
-		return Integer.MAX_VALUE; // TODO Complete this code.
+		int numRanks = Rank.values().length;
+		return aSuit.ordinal() * numRanks + aRank.ordinal();
 	}
 }
