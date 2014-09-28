@@ -11,12 +11,14 @@ import java.util.Set;
  */
 public class Hand
 {
+	private CardSet aCardSet;
+
 	/**
 	 * Creates a new, empty hand.
 	 */
 	public Hand()
 	{
-		// TODO
+		aCardSet = new CardSet();
 	}
 	
 	/**
@@ -29,7 +31,17 @@ public class Hand
 	 */
 	public void add( Card pCard )
 	{
-		// TODO
+		if(isComplete())
+		{
+			throw new HandException("Cannot add card: Hand is Complete.");
+		}
+		
+		if(contains(pCard))
+		{
+			throw new HandException("Cannot add card: that card is already in hand.");
+		}
+		
+		aCardSet.add(pCard);
 	}
 	
 	/**
