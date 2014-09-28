@@ -110,6 +110,11 @@ public final class Card implements Comparable<Card>
 	@Override
 	public boolean equals( Object pCard ) 
 	{
+		if(pCard == null) 
+		{
+			return false;
+		}
+		
 		if(this.aRank.equals(((Card)pCard).aRank))
 		{
 			if(this.aSuit.equals(((Card)pCard).aSuit))
