@@ -1,5 +1,7 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -8,14 +10,14 @@ import java.util.Iterator;
  */
 public class CardSet implements ICardSet
 {
-	private HashSet<Card> aCardSet;
+	private ArrayList<Card> aCardSet;
 	
 	/**
 	 * Default constructor.
 	 */
 	public CardSet()
 	{
-		aCardSet = new HashSet<Card>();
+		aCardSet = new ArrayList<Card>();
 	}
 	
 	/**
@@ -41,13 +43,10 @@ public class CardSet implements ICardSet
 		{
 			return false;
 		}
-		
-		for(Card c : aCardSet)
+
+		if(aCardSet.contains(pCard)) 
 		{
-			if(c.equals(pCard))
-			{
-				return true;
-			}
+			return true;
 		}
 		
 		return false;
@@ -62,15 +61,46 @@ public class CardSet implements ICardSet
 	@Override
 	public boolean isGroup()
 	{
-		// TODO Auto-generated method stub
-		return false;
+		if(aCardSet.size() != 3 || aCardSet.size() != 4)
+		{
+			return false;
+		}
+
+		for(int i = 1; i < aCardSet.size(); i++)
+		{
+			Card.Rank firstRank = aCardSet.get(i-1).getRank();
+			Card.Rank secondRank = aCardSet.get(i).getRank();
+			if(firstRank != secondRank)
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
 	public boolean isRun()
 	{
-		// TODO Auto-generated method stub
-		return false;
+		if(aCardSet.size() < 3)
+		{
+			return false;
+		}
+		
+		Collections.sort(aCardSet);
+		
+		// If it is a valid run, then each rank < next rank
+		for(int i = 1; i < aCardSet.size(); i++)
+		{
+			Card.Rank previous = aCardSet.get(i-1).getRank();
+			Card.Rank current = aCardSet.get(i).getRank();
+			
+			if(previous.ordinal() >= current.ordinal())
+			{
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 }
