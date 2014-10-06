@@ -70,6 +70,7 @@ public final class Card implements Comparable<Card>
 	 */
 	public int compareTo(Card pCard)
 	{
+		if(pCard == null) return -1;
 		// This card's rank is lower, therefore the other card is better
 		if(aRank.ordinal() < pCard.aRank.ordinal())
 		{
