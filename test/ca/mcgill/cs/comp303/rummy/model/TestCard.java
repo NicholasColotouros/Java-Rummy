@@ -21,6 +21,7 @@ public class TestCard
 	public void testGetRank()
 	{
 		assertTrue(aT1.getRank() == Card.Rank.ACE);
+		assertEquals("k", Card.Rank.ACE, aT1.getRank());
 	}
 	
 	@Test
