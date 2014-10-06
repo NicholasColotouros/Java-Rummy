@@ -2,7 +2,7 @@ Java-Rummy
 ==========
 
 A java implementation of the card game Gin-Rummy as part of an optional, ungraded project for COMP 303.
-
+The rules that will be used for this implementation of the game can be found [here](http://www.pagat.com/rummy/ginrummy.html).
 
 ##General Setup (for working on the project)
 
@@ -20,9 +20,13 @@ A java implementation of the card game Gin-Rummy as part of an optional, ungrade
 
 ##TO DO:
 
+
+###MILESTONE 1:
 1. ~~Complete the implementation of the Card class.~~
 2. Implement one or more classes to support the behavior specified by ICardSet.
 3. Complete the implementation of class ...model.Hand. The most complex part of this assignment is the implementation of the autoMatch method. This method must always complete in less than 0.1 second.
 4. Complete all the test classes and use EclEmma to ensure you achieve 100% statement coverage. You may want to consider implementing a small code generator to generate tests for automatch.
 5. Make sure all your code respects the style guidelines
-6. MILESTONE 2
+
+###MILESTONE 2
+* see file
