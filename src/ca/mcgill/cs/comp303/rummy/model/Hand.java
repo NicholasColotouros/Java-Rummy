@@ -1,5 +1,7 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,14 +13,23 @@ import java.util.Set;
  */
 public class Hand
 {
-	private CardSet aCardSet;
-
+	private final int HAND_SIZE = 10;
+	private ArrayList<CardSet> aRuns;
+	private ArrayList<CardSet> aGroups;
+	private ArrayList<Card> aUnmatched;
+	private ArrayList<Card> aCards;
+	
+	
 	/**
 	 * Creates a new, empty hand.
 	 */
 	public Hand()
 	{
-		aCardSet = new CardSet();
+		aRuns = new ArrayList<CardSet>();
+		aGroups = new ArrayList<CardSet>();
+		aUnmatched = new ArrayList<Card>();
+		aCards = new ArrayList<Card>();
+		
 	}
 	
 	/**
@@ -31,17 +42,17 @@ public class Hand
 	 */
 	public void add( Card pCard )
 	{
-		if(isComplete())
+		if( this.isComplete() )
 		{
-			throw new HandException("Cannot add card: Hand is Complete.");
+			throw new HandException("The hand is already complete");
+		}
+		if ( this.contains(pCard ))
+		{
+			throw new HandException("This card is already in the hand");
 		}
 		
-		if(contains(pCard))
-		{
-			throw new HandException("Cannot add card: that card is already in hand.");
-		}
-		
-		aCardSet.add(pCard);
+		this.aUnmatched.add(pCard);
+		return;
 	}
 	
 	/**
@@ -53,7 +64,7 @@ public class Hand
 	 */
 	public void remove( Card pCard )
 	{
-		// TODO
+		
 	}
 	
 	/**
@@ -61,7 +72,12 @@ public class Hand
 	 */
 	public boolean isComplete()
 	{
-		return true; // TODO
+		if ( aCards.size() == HAND_SIZE )
+		{
+			return true;
+		}
+		
+		return false; 
 	}
 	
 	/**
@@ -69,7 +85,10 @@ public class Hand
 	 */
 	public void clear()
 	{
-		// TODO
+		aCards = new ArrayList<Card>();
+		aRuns = new ArrayList<CardSet>();
+		aGroups = new ArrayList<CardSet>();
+		aUnmatched = new ArrayList<Card>();
 	}
 	
 	/**
@@ -85,7 +104,7 @@ public class Hand
 	 */
 	public Set<Card> getUnmatchedCards()
 	{
-		return null; // TODO
+		return new HashSet<Card>(aUnmatched);
 	}
 	
 	/**
@@ -93,7 +112,7 @@ public class Hand
 	 */
 	public int size()
 	{
-		return Integer.MAX_VALUE; // TODO
+		return this.aCards.size(); 
 	}
 	
 	/**
@@ -105,7 +124,12 @@ public class Hand
 	 */
 	public boolean contains( Card pCard )
 	{
-		return false; // TODO
+		if ( aCards.contains(pCard) )
+		{
+			return true;
+		}
+		
+		return false; 
 	}
 	
 	/**
@@ -113,7 +137,8 @@ public class Hand
 	 */
 	public int score()
 	{
-		return Integer.MAX_VALUE; // TODO
+		int score = 0; 
+		return 0;
 	}
 	
 	/**
@@ -146,5 +171,6 @@ public class Hand
 	 */
 	public void autoMatch()
 	{
+		//TODO
 	}
 }
