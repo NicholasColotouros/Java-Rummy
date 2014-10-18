@@ -21,7 +21,6 @@ public class Hand
 	
 	/**
 	 * Creates a new, empty hand.
-	 * @author: Mike
 	 */
 	public Hand()
 	{
@@ -38,7 +37,6 @@ public class Hand
 	 * @throws HandException if the hand is complete.
 	 * @throws HandException if the card is already in the hand.
 	 * @pre pCard != null
-	 * @author: Pascale
 	 */
 	public void add( Card pCard ) throws HandException
 	{
@@ -60,7 +58,6 @@ public class Hand
 	 * pCard is not in the hand.
 	 * @param pCard The card to remove.
 	 * @pre pCard != null
-	 * @author: Mike
 	 */
 	public void remove( Card pCard )
 	{
@@ -96,7 +93,6 @@ public class Hand
 	
 	/**
 	 * @return True if the hand is complete.
-	 * @author: Pascale.
 	 */
 	public boolean isComplete()
 	{
@@ -109,7 +105,6 @@ public class Hand
 	
 	/**
 	 * Removes all the cards from the hand.
-	 * @author: Mike.
 	 */
 	public void clear()
 	{
@@ -121,7 +116,6 @@ public class Hand
 	
 	/**
 	 * @return A copy of the set of matched sets
-	 * @author: Pascale.
 	 */
 	public Set<ICardSet> getMatchedSets()
 	{
@@ -132,7 +126,6 @@ public class Hand
 	
 	/**
 	 * @return A copy of the set of unmatched cards.
-	 * @author: Mike.
 	 */
 	public Set<Card> getUnmatchedCards()
 	{
@@ -141,7 +134,6 @@ public class Hand
 	
 	/**
 	 * @return The number of cards in the hand.
-	 * @author: Pascale.
 	 */
 	public int size()
 	{
@@ -154,7 +146,6 @@ public class Hand
 	 * @param pCard The card to check.
 	 * @return true if the card is already in the hand.
 	 * @pre pCard != null 
-	 * @author Mike
 	 */
 	public boolean contains( Card pCard )
 	{
@@ -163,7 +154,6 @@ public class Hand
 	
 	/**
 	 * @return The total point value of the unmatched cards in this hand.
-	 * @author: Pascale.
 	 */
 	public int score()
 	{
@@ -171,9 +161,9 @@ public class Hand
 		for (Card c : this.aUnmatched)
 		{
 			int cardPoints = c.getRank().ordinal() + 1;
-			if (cardPoints > 10)
+			if (cardPoints > HAND_SIZE)
 			{
-				cardPoints = 10;
+				cardPoints = HAND_SIZE;
 			}
 			score += cardPoints;
 		}
@@ -186,7 +176,6 @@ public class Hand
 	 * @pre pCards != null
 	 * @throws HandException If the cards in pCard are not all unmatched
 	 * cards of the hand or if the group is not a valid group.
-	 * @author: Mike.
 	 */
 	public void createGroup( Set<Card> pCards )
 	{
@@ -221,7 +210,6 @@ public class Hand
 	 * @pre pCards != null
 	 * @throws HandException If the cards in pCards are not all unmatched
 	 * cards of the hand or if the run is not a valid run.
-	 * @author: Pascale.
 	 */
 	public void createRun( Set<Card> pCards ) throws HandException
 	{	
@@ -255,7 +243,6 @@ public class Hand
 	 */
 	public void autoMatch()
 	{
-		
 		HashSet<CardSet> sets = new HashSet<CardSet>();
 	}
 }
