@@ -15,8 +15,8 @@ public class Hand
 {
 	private ArrayList<Card> aCards;
 	private ArrayList<Card> aUnmatched;
-	private ArrayList<CardSet> aRuns;
-	private ArrayList<CardSet> aGroups;
+	private ArrayList<ICardSet> aRuns;
+	private ArrayList<ICardSet> aGroups;
 	private final static int HAND_SIZE = 10;
 	
 	/**
@@ -26,8 +26,8 @@ public class Hand
 	{
 		aCards = new ArrayList<Card>();
 		aUnmatched = new ArrayList<Card>();
-		aRuns = new ArrayList<CardSet>();
-		aGroups = new ArrayList<CardSet>();
+		aRuns = new ArrayList<ICardSet>();
+		aGroups = new ArrayList<ICardSet>();
 	}
 	
 	/**
@@ -64,28 +64,28 @@ public class Hand
 		aCards.remove(pCard);
 		aUnmatched.remove(pCard);
 		// Remove any runs containing the card to remove.
-		ArrayList<CardSet> runsToRemove = new ArrayList<CardSet>();
-		for (CardSet run : aRuns) 
+		ArrayList<ICardSet> runsToRemove = new ArrayList<ICardSet>();
+		for (ICardSet run : aRuns) 
 		{
 			if (run.contains(pCard)) 
 			{
 				runsToRemove.add(run);	
 			}
 		}
-		for (CardSet run : runsToRemove)
+		for (ICardSet run : runsToRemove)
 		{
 			aRuns.remove(run);
 		}
 		// Remove any groups containing the card to remove.
-		ArrayList<CardSet> groupsToRemove = new ArrayList<CardSet>();
-		for (CardSet group : aGroups) 
+		ArrayList<ICardSet> groupsToRemove = new ArrayList<ICardSet>();
+		for (ICardSet group : aGroups) 
 		{
 			if (group.contains(pCard))
 			{
 				groupsToRemove.add(group);
 			}
 		}
-		for (CardSet group : groupsToRemove)
+		for (ICardSet group : groupsToRemove)
 		{
 			aGroups.remove(group);
 		}
@@ -110,8 +110,8 @@ public class Hand
 	{
 		aCards = new ArrayList<Card>();
 		aUnmatched = new ArrayList<Card>();
-		aRuns = new ArrayList<CardSet>();
-		aGroups = new ArrayList<CardSet>();
+		aRuns = new ArrayList<ICardSet>();
+		aGroups = new ArrayList<ICardSet>();
 	}
 	
 	/**
