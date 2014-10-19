@@ -318,19 +318,19 @@ SystemObserver</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double8"/>
-      <double>1178.0</double>
+      <double>1183.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double8"/>
-      <double>243.0</double>
+      <double>231.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1178.0</double>
-     <double>243.0</double>
+     <double>1183.0</double>
+     <double>231.0</double>
     </void>
    </object>
   </void>
@@ -442,14 +442,12 @@ GameObserver</string>
      <void property="text">
       <string>- Stack&lt;Card&gt; aDiscardPile
 - boolean aP1IsDealer
-- boolean aGameOver
 - Phase aTurnPhase</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
       <string>+ void newGame(boolean)
-+ void isGameOver()
 -------- PLAY METHODS --------
 + void discard(Player, Card)
 + void knock()
@@ -653,8 +651,8 @@ Keeping track of this facilitates saving/loading</string>
    <object class="com.horstmann.violet.PointNode" id="PointNode0">
     <void id="Rectangle2D$Double0" property="bounds">
      <void method="setRect">
-      <double>1001.0</double>
-      <double>217.0</double>
+      <double>1004.0</double>
+      <double>203.0</double>
       <double>0.0</double>
       <double>0.0</double>
      </void>
@@ -668,19 +666,19 @@ Keeping track of this facilitates saving/loading</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double17"/>
-      <double>1001.0</double>
+      <double>1004.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double17"/>
-      <double>217.0</double>
+      <double>203.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1001.0</double>
-     <double>217.0</double>
+     <double>1004.0</double>
+     <double>203.0</double>
     </void>
    </object>
   </void>
