@@ -26,6 +26,6 @@ The rules that will be used for this implementation of the game can be found [he
 2. Complete all the test classes and use EclEmma to ensure you achieve 100% statement coverage. You may want to consider implementing a small code generator to generate tests for automatch.
 3. Make sure all your code respects the style guidelines
 
-###MILESTONE 2
+###MILESTONE 2:
 Finalize design of Milestone 2 specs using class, state and sequence diagrams as per M2 design specs (see milestone2 instructions HTML file)
 * Implement it
