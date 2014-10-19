@@ -1,8 +1,11 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Set;
 import java.util.HashSet;
+
+import ca.mcgill.cs.comp303.rummy.model.Card.Rank;
 
 /**
  * Models a hand of 10 cards. The hand is not sorted. Not threadsafe.
@@ -244,5 +247,48 @@ public class Hand
 	public void autoMatch()
 	{
 		HashSet<CardSet> sets = new HashSet<CardSet>();
+		
+		// TODO: current implementation just makes groups
+		
+		// all cards are considered unmatched
+		aRuns = new ArrayList<ICardSet>();
+		aGroups = new ArrayList<ICardSet>();
+		
+		// copy the cards to the unmatched card set
+		aUnmatched = new ArrayList<Card>();
+		for(Card c : aCards)
+		{
+			aUnmatched.add(c);
+		}
+		
+		Collections.sort(aUnmatched);
+		
+		// Make groups by starting at a card and checking at most the next 4
+		for(int i = 0; i < aCards.size() - 1; i++)
+		{
+			HashSet<Card> possibleGroup = new HashSet<Card>();
+			possibleGroup.add(aCards.get(i));
+			Rank groupRank = aCards.get(i).getRank();
+			
+			for(int j = i + 1; j <= i + 4; j++)
+			{
+				// if the rank of the next card is the same as the rank of the group,
+				// add it to the group and remove it from the unmatched cards
+				Rank currentRank = aCards.get(j).getRank();
+				if(currentRank == groupRank)
+				{
+					possibleGroup.add(aCards.get(j));
+					aUnmatched.remove(aCards.get(j));
+				}
+			}
+			
+			// if it's a group, add it to the set of all groups
+			CardSet possibleSet = new CardSet(possibleGroup);
+			if(possibleSet.isGroup())
+			{
+				aGroups.add(possibleSet);
+			}
+		}
+
 	}
 }
