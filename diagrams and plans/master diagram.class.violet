@@ -620,9 +620,10 @@ First card revealed:
 SO: phases enum type:
 FIRSTDRAW
 P1DRAW
-P1DISCARD
+P1DISCARD / P1LAYOFF
 P2DRAW
-P2DISCARD
+P2DISCARD / P2LAYOFF
+ENDGAME
 Keeping track of this facilitates saving/loading</string>
      </void>
     </void>
@@ -632,19 +633,19 @@ Keeping track of this facilitates saving/loading</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double16"/>
-      <double>1356.0</double>
+      <double>1347.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double16"/>
-      <double>20.0</double>
+      <double>1.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1356.0</double>
-     <double>20.0</double>
+     <double>1347.0</double>
+     <double>1.0</double>
     </void>
    </object>
   </void>
@@ -652,8 +653,8 @@ Keeping track of this facilitates saving/loading</string>
    <object class="com.horstmann.violet.PointNode" id="PointNode0">
     <void id="Rectangle2D$Double0" property="bounds">
      <void method="setRect">
-      <double>987.0</double>
-      <double>218.0</double>
+      <double>982.0</double>
+      <double>208.0</double>
       <double>0.0</double>
       <double>0.0</double>
      </void>
@@ -667,19 +668,19 @@ Keeping track of this facilitates saving/loading</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double17"/>
-      <double>987.0</double>
+      <double>982.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double17"/>
-      <double>218.0</double>
+      <double>208.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>987.0</double>
-     <double>218.0</double>
+     <double>982.0</double>
+     <double>208.0</double>
     </void>
    </object>
   </void>
