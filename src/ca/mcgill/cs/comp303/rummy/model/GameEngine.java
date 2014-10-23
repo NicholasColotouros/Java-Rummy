@@ -64,11 +64,6 @@ public final class GameEngine implements Serializable
 		aPlayer2 = new Player(pP2Name);
 	}
 	
-	public Card drawFromDeck()
-	{
-		
-	}
-	
 	/**
 	 * Returns the top of the discard pile. It is not taken, simply looked at.
 	 * @return The top card of the discard pile
