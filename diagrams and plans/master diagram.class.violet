@@ -442,7 +442,8 @@ GameObserver</string>
      <void property="text">
       <string>- Stack&lt;Card&gt; aDiscardPile
 - boolean aP1IsDealer
-- Phase aTurnPhase</string>
+- Phase aTurnPhase
+- GameEngine INSTANCE</string>
      </void>
     </void>
     <void property="methods">
@@ -461,6 +462,7 @@ GameObserver</string>
 ---- OBSERVER METHODS ----
 - void addObserver(Observer)
 - void notifyObservers()
+- GameEngine getInstance()
 -------- SAVE METHODS -------
 + save(Serializer, String)
 + load(Serializer, String)</string>
