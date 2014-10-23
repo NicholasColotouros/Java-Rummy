@@ -458,11 +458,11 @@ GameObserver</string>
 + Player getComputer()
 + Player getPlayer(int pID)
 + Card getTopOfDiscardPile()
-
++ GameEngine getEngine()
 ---- OBSERVER METHODS ----
-- void addObserver(Observer)
++ void addObserver(Observer)
++ void removeObserver(Observer)
 - void notifyObservers()
-- GameEngine getInstance()
 -------- SAVE METHODS -------
 + save(Serializer, String)
 + load(Serializer, String)</string>
