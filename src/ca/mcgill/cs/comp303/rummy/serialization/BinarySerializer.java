@@ -17,10 +17,10 @@ public class BinarySerializer implements Serializer
 	}
 
 	@Override
-	public void load(String pPath) throws LoadException
+	public GameEngine load(String pPath) throws LoadException
 	{
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

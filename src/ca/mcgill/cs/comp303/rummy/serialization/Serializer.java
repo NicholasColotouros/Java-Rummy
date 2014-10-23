@@ -22,6 +22,7 @@ public interface Serializer
 	 * Loads the game from pre-existing file.
 	 * @param pPath the full location file to be loaded
 	 * @throws LoadException is thrown if something goes wrong like corrupted save or an invalid path
+	 * @return the loaded GameEngine
 	 */
-	void load(String pPath) throws LoadException;
+	GameEngine load(String pPath) throws LoadException;
 }
