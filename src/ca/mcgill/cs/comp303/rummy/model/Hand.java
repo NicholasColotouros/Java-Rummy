@@ -1,5 +1,6 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Set;
@@ -14,7 +15,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card.Rank;
  * @inv size() > 0
  * @inv size() <= HAND_SIZE
  */
-public class Hand
+public class Hand implements Serializable
 {
 	private ArrayList<Card> aCards;
 	private ArrayList<Card> aUnmatched;

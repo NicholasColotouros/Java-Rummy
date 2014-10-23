@@ -1,9 +1,11 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
+import java.io.Serializable;
+
 /**
  * An immutable description of a playing card.
  */
-public final class Card implements Comparable<Card>
+public final class Card implements Comparable<Card>, Serializable
 {
 	/**
 	 * Represents the rank of the card.

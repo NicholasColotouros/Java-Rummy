@@ -1,5 +1,6 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
+import java.io.Serializable;
 import java.util.Stack;
 
 import ca.mcgill.cs.comp303.rummy.exceptions.LoadException;
@@ -9,8 +10,12 @@ import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
 /**
  * The heart and soul of the game. Responsible for managing the game.
  */
-public final class GameEngine
+public final class GameEngine implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3306656900603120034L;
 	private static final GameEngine INSTANCE = new GameEngine();
 	
 	/**

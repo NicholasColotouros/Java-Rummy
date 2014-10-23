@@ -1,5 +1,6 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Stack;
 
@@ -9,7 +10,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card.Suit;
 /**
  * Models a deck of 52 cards (no joker).
  */
-public class Deck 
+public class Deck  implements Serializable
 {
 	private Stack<Card> aCards;
 	

@@ -1,5 +1,6 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,7 +11,7 @@ import java.util.Set;
 /**
  * 
  */
-public class CardSet implements ICardSet
+public class CardSet implements ICardSet, Serializable
 {
 	private HashSet<Card> aCards;
 	

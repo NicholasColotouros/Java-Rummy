@@ -1,9 +1,11 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
+import java.io.Serializable;
+
 /**
  * Represents a player that plays the game.
  */
-public class Player
+public class Player implements Serializable
 {
 	private final String aName;
 	private int aScore;
