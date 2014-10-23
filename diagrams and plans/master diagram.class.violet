@@ -303,7 +303,7 @@ ICardSet</string>
    <object class="com.horstmann.violet.InterfaceNode" id="InterfaceNode1">
     <void property="methods">
      <void property="text">
-      <string>update()</string>
+      <string>update(Priority, String pMsessage)</string>
      </void>
     </void>
     <void property="name">
@@ -743,19 +743,19 @@ Keeping track of this facilitates saving/loading</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double19"/>
-      <double>1484.0</double>
+      <double>1552.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double19"/>
-      <double>295.0</double>
+      <double>301.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1484.0</double>
-     <double>295.0</double>
+     <double>1552.0</double>
+     <double>301.0</double>
     </void>
    </object>
   </void>
