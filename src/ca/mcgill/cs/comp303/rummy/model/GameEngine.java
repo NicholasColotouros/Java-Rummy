@@ -3,6 +3,7 @@ package ca.mcgill.cs.comp303.rummy.model;
 import java.io.Serializable;
 import java.util.Stack;
 
+import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 import ca.mcgill.cs.comp303.rummy.exceptions.LoadException;
 import ca.mcgill.cs.comp303.rummy.exceptions.SaveException;
 import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
@@ -26,7 +27,6 @@ public final class GameEngine implements Serializable
 		UNINITIALIZED, FIRSTDRAW, 
 		P1DRAW, P1DISCARD, 
 		P2DRAW, P2DISCARD, 
-		P1LAYOFF, P2LAYOFF,
 		ENDGAME
 	};
 	
@@ -35,6 +35,7 @@ public final class GameEngine implements Serializable
 	private Stack<Card> aDiscardPile;
 	private boolean aP1IsDealer;
 	
+	// Player1 is the human by default
 	private Player aPlayer1;
 	private Player aPlayer2;
 	
@@ -68,8 +69,9 @@ public final class GameEngine implements Serializable
 	 * Discard the card and add it to the discard pile. The card is only discarded if the player has the card to discard.
 	 * @param pPlayer The player to discard the card.
 	 * @param pCard The card to be discarded.
+	 * @throws CannotPerformActionException if the card discarded is the card that was previously drawn.
 	 */
-	public void discard(Player pPlayer, Card pCard)
+	public void discard(Player pPlayer, Card pCard) throws CannotPerformActionException
 	{
 		if(pPlayer.discard(pCard)) 
 		{
