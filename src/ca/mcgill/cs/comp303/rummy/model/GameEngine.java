@@ -1,5 +1,7 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
+import java.util.Stack;
+
 import ca.mcgill.cs.comp303.rummy.exceptions.LoadException;
 import ca.mcgill.cs.comp303.rummy.exceptions.SaveException;
 import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
@@ -10,7 +12,39 @@ import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
 public final class GameEngine
 {
 	private static final GameEngine INSTANCE = new GameEngine();
+	
+	/**
+	 * Represents the state of the game.  
+	 */
+	private enum GamePhase
+	{
+		UNINITIALIZED, FIRSTDRAW, 
+		P1DRAW, P1DISCARD, 
+		P2DRAW, P2DISCARD, 
+		P1LAYOFF, P2LAYOFF,
+		ENDGAME
+	};
+	
+	private GamePhase aPhase = GamePhase.UNINITIALIZED;
+	private Deck aDeck = new Deck();
+	private Stack<Card> aDiscardPile = new Stack<Card>();
+	private boolean aP1IsDealer = false;
+	
+	private Player aPlayer1;
+	private Player aPlayer2;
+	
 	private GameEngine(){}
+	
+	
+	
+	/**
+	 * Returns the top of the discard pile. It is not taken, simply looked at.
+	 * @return The top card of the discard pile
+	 */
+	public Card getTopOfDiscard()
+	{
+		return aDiscardPile.peek();
+	}
 	
 	/**
 	 * Gets the singleton instance.
