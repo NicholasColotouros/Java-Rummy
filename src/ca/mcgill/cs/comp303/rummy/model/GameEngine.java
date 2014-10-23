@@ -87,7 +87,10 @@ public final class GameEngine implements Serializable
 	 */
 	public void drawFromDeck(Player pPlayer) throws CannotDrawException
 	{
-		// TODO: should an exception be thrown if the deck is empty?
+		if(aDeck.size() < 2)
+		{
+			throw new CannotDrawException("Cannot draw from deck: ");
+		}
 		pPlayer.addCard(aDeck.draw());
 	}
 	
