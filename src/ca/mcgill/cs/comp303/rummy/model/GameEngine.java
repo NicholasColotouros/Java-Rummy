@@ -3,6 +3,7 @@ package ca.mcgill.cs.comp303.rummy.model;
 import java.io.Serializable;
 import java.util.Stack;
 
+import ca.mcgill.cs.comp303.rummy.exceptions.CannotDrawException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 import ca.mcgill.cs.comp303.rummy.exceptions.LoadException;
 import ca.mcgill.cs.comp303.rummy.exceptions.SaveException;
@@ -82,8 +83,9 @@ public final class GameEngine implements Serializable
 	/**
 	 * Takes a card from the deck and adds it to the specified players hand.
 	 * @param pPlayer the player to get the drawn card
+	 * @throws CannotDrawException when there are less than two cards in the deck
 	 */
-	public void drawFromDeck(Player pPlayer)
+	public void drawFromDeck(Player pPlayer) throws CannotDrawException
 	{
 		// TODO: should an exception be thrown if the deck is empty?
 		pPlayer.addCard(aDeck.draw());
@@ -92,10 +94,14 @@ public final class GameEngine implements Serializable
 	/**
 	 * Takes a card from the discard pile and adds it to the specified players hand.
 	 * @param pPlayer the player to get the drawn card	 
+	 * @throws CannotDrawException when the discard pile is empty
 	 */
-	public void drawFromDiscardPile(Player pPlayer)
+	public void drawFromDiscardPile(Player pPlayer) throws CannotDrawException
 	{
-		// TODO: should an exception be thrown if the discard pile is empty?
+		if(aDiscardPile.isEmpty()) 
+		{
+			throw new CannotDrawException("Cannot draw from discard pile: no cards to draw.");
+		}
 		pPlayer.addCard(aDiscardPile.pop());
 	}
 	
