@@ -25,17 +25,39 @@ public final class GameEngine
 		ENDGAME
 	};
 	
-	private GamePhase aPhase = GamePhase.UNINITIALIZED;
-	private Deck aDeck = new Deck();
-	private Stack<Card> aDiscardPile = new Stack<Card>();
-	private boolean aP1IsDealer = false;
+	private GamePhase aPhase;
+	private Deck aDeck;
+	private Stack<Card> aDiscardPile;
+	private boolean aP1IsDealer;
 	
 	private Player aPlayer1;
 	private Player aPlayer2;
 	
-	private GameEngine(){}
+	private GameEngine()
+	{
+		reset();
+	}
 	
+	private void reset()
+	{
+		aPhase = GamePhase.UNINITIALIZED;
+		aDeck = new Deck();
+		aDiscardPile = new Stack<Card>();
+		aP1IsDealer = false;
+	}
 	
+	/**
+	 * Starts a new game.
+	 * @param pTwoAIs true means the computer will be playing against another computer, flase means player 1 is a human player.
+	 * @param pP1Name Player 1s name
+	 * @param pP2Name Player 2s name
+	 */
+	public void newGame(boolean pTwoAIs, String pP1Name, String pP2Name)
+	{
+		reset();
+		aPlayer1 = new Player(pP1Name);
+		aPlayer2 = new Player(pP2Name);
+	}
 	
 	/**
 	 * Returns the top of the discard pile. It is not taken, simply looked at.
