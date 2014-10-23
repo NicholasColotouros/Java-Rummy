@@ -64,6 +64,11 @@ public final class GameEngine implements Serializable
 		aPlayer2 = new Player(pP2Name);
 	}
 	
+	public Card drawFromDeck()
+	{
+		
+	}
+	
 	/**
 	 * Returns the top of the discard pile. It is not taken, simply looked at.
 	 * @return The top card of the discard pile
@@ -83,7 +88,7 @@ public final class GameEngine implements Serializable
 	}
 	
 	/**
-	 * Saves the game.dklfnlsdknf
+	 * Saves the game.
 	 * @param pSerializer the format for which to implement the serializer
 	 * @param pPath the full path to save the game
 	 * @throws SaveException thrown when something goes wrong during saving 
