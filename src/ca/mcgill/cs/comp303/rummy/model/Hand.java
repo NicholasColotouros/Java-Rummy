@@ -3,6 +3,7 @@ package ca.mcgill.cs.comp303.rummy.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -15,7 +16,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card.Rank;
  * @inv size() > 0
  * @inv size() <= HAND_SIZE
  */
-public class Hand implements Serializable
+public class Hand implements Serializable, Iterable
 {
 	private ArrayList<Card> aCards;
 	private ArrayList<Card> aUnmatched;
@@ -291,5 +292,11 @@ public class Hand implements Serializable
 			}
 		}
 
+	}
+
+	@Override
+	public Iterator iterator()
+	{
+		return aCards.iterator();
 	}
 }

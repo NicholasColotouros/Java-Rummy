@@ -65,6 +65,39 @@ public final class GameEngine implements Serializable
 	}
 	
 	/**
+	 * Discard the card and add it to the discard pile. The card is only discarded if the player has the card to discard.
+	 * @param pPlayer The player to discard the card.
+	 * @param pCard The card to be discarded.
+	 */
+	public void discard(Player pPlayer, Card pCard)
+	{
+		if(pPlayer.discard(pCard)) 
+		{
+			aDiscardPile.push(pCard);
+		}
+	}
+	
+	/**
+	 * Takes a card from the deck and adds it to the specified players hand.
+	 * @param pPlayer the player to get the drawn card
+	 */
+	public void drawFromDeck(Player pPlayer)
+	{
+		// TODO: should an exception be thrown if the deck is empty?
+		pPlayer.addCard(aDeck.draw());
+	}
+	
+	/**
+	 * Takes a card from the discard pile and adds it to the specified players hand.
+	 * @param pPlayer the player to get the drawn card	 
+	 */
+	public void drawFromDiscardPile(Player pPlayer)
+	{
+		// TODO: should an exception be thrown if the discard pile is empty?
+		pPlayer.addCard(aDiscardPile.pop());
+	}
+	
+	/**
 	 * Returns the top of the discard pile. It is not taken, simply looked at.
 	 * @return The top card of the discard pile
 	 */
@@ -77,7 +110,7 @@ public final class GameEngine implements Serializable
 	 * Gets the singleton instance.
 	 * @return the instance of the gameEngine
 	 */
-	public static GameEngine getEngine()
+	public static GameEngine getInstance()
 	{
 		return aGameInstance;
 	}
