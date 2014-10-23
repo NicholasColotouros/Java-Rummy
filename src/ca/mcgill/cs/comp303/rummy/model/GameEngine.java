@@ -16,7 +16,7 @@ public final class GameEngine implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 3306656900603120034L;
-	private static final GameEngine INSTANCE = new GameEngine();
+	private static GameEngine aGameInstance = new GameEngine();
 	
 	/**
 	 * Represents the state of the game.  
@@ -79,7 +79,7 @@ public final class GameEngine implements Serializable
 	 */
 	public static GameEngine getEngine()
 	{
-		return INSTANCE;
+		return aGameInstance;
 	}
 	
 	/**
@@ -101,6 +101,7 @@ public final class GameEngine implements Serializable
 	 */
 	public void load(Serializer pSerializer, String pPath) throws LoadException
 	{
-		pSerializer.load(pPath);
+		aGameInstance = pSerializer.load(pPath);
+		// TODO: update the rest and get things going from where things were left off
 	}
 }
