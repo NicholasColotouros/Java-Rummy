@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Stack;
 
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotDrawException;
+import ca.mcgill.cs.comp303.rummy.exceptions.CannotKnockException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 import ca.mcgill.cs.comp303.rummy.exceptions.LoadException;
 import ca.mcgill.cs.comp303.rummy.exceptions.SaveException;
@@ -112,6 +113,24 @@ public final class GameEngine implements Serializable
 
 		// Next phase is discard
 		aPhase = GamePhase.DISCARD;
+	}
+	
+	/**
+	 * Simulates knocking, which is done AFTER discarding a card.
+	 * @param pPlayer the player that knocked.
+	 * @throws CannotKnockException if the player who knocked has >= 10 points of deadwood 
+	 */
+	public void knock(Player pPlayer) throws CannotKnockException
+	{
+		if(pPlayer.getHand().score() >= 10)
+		{
+			throw new CannotKnockException("Player " + pPlayer.getName() + " cannot knock. Too much deadwood");
+		}
+		
+		// TODO: Run the new version of automatch, which calculates the optimal scores for both players,
+		// then based on who has the better score, update the players score appropriately
+		
+		aPhase = GamePhase.ENDGAME;
 	}
 	
 	/**
