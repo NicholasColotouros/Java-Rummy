@@ -8,5 +8,4 @@ public class CannotDrawException extends CannotPerformActionException
 {
 	public CannotDrawException(){}
 	public CannotDrawException(String pMessage){super(pMessage);}
-
 }
