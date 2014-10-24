@@ -8,8 +8,9 @@ import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 /**
  * Represents a player that plays the game.
  */
-public class Player implements Serializable, Iterable
+public class Player implements Serializable
 {
+	private static final long serialVersionUID = 6763429439067353883L;
 	private final String aName;
 	private int aScore;
 	private Hand aHand;
@@ -24,15 +25,6 @@ public class Player implements Serializable, Iterable
 		aName = pName;
 		aScore = 0;
 		aHand = new Hand();
-	}
-	
-	/**
-	 * Gets the name of the player.
-	 * @return the name of the player.
-	 */
-	public String getName()
-	{
-		return aName;
 	}
 	
 	/**
@@ -66,6 +58,15 @@ public class Player implements Serializable, Iterable
 	}
 	
 	/**
+	 * Gets the name of the player.
+	 * @return the name of the player.
+	 */
+	public String getName()
+	{
+		return aName;
+	}
+	
+	/**
 	 * Returns the players score.
 	 * @return the players score.
 	 */
@@ -73,11 +74,13 @@ public class Player implements Serializable, Iterable
 	{
 		return aScore;
 	}
-
-	@Override
-	public Iterator iterator()
+	
+	/**
+	 * Gets the hand contained in the player.
+	 * @return a copy of the players hand.
+	 */
+	public Hand getHand()
 	{
-		// TODO: what to iterator over (specify the generic)?
-		return aHand.iterator();
+		return new Hand(aHand);
 	}
 }

@@ -16,13 +16,24 @@ import ca.mcgill.cs.comp303.rummy.model.Card.Rank;
  * @inv size() > 0
  * @inv size() <= HAND_SIZE
  */
-public class Hand implements Serializable, Iterable
+public class Hand implements Serializable
 {
+	private static final int HAND_SIZE = 10;
 	private ArrayList<Card> aCards;
 	private ArrayList<Card> aUnmatched;
 	private ArrayList<ICardSet> aRuns;
 	private ArrayList<ICardSet> aGroups;
-	private final static int HAND_SIZE = 10;
+	
+	
+	/**
+	 * Copy Constructor.
+	 * @param pHand the hand to be copied
+	 */
+	public Hand(Hand pHand)
+	{
+		aCards = pHand.getCards();
+		// TODO finish copying all of the fields
+	}
 	
 	/**
 	 * Creates a new, empty hand.
@@ -293,10 +304,18 @@ public class Hand implements Serializable, Iterable
 		}
 
 	}
-
-	@Override
-	public Iterator iterator()
+	
+	/**
+	 * Gets the cards in the hand.
+	 * @return a copy of the cards in the hand
+	 */
+	public ArrayList<Card> getCards()
 	{
-		return aCards.iterator();
+		ArrayList<Card> ret = new ArrayList<Card>();
+		for(Card c : aCards)
+		{
+			ret.add(c);
+		}
+		return ret;
 	}
 }
