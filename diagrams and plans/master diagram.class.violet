@@ -420,6 +420,7 @@ Serializer</string>
 + void discard(Player, Card)
 + Card DrawFromDeck(Player)
 + Card DrawFromDiscard(Player)
++ void knock()
 --------- GET METHODS ---------
 + Player getPlayer1()
 + Player getPlayer2()
