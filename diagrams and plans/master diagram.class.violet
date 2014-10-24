@@ -319,19 +319,19 @@ SystemObserver</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double8"/>
-      <double>1310.0</double>
+      <double>1127.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double8"/>
-      <double>286.0</double>
+      <double>291.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1310.0</double>
-     <double>286.0</double>
+     <double>1127.0</double>
+     <double>291.0</double>
     </void>
    </object>
   </void>
@@ -401,48 +401,10 @@ Serializer</string>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.InterfaceNode" id="InterfaceNode2">
-    <void property="methods">
-     <void property="text">
-      <string>newGame()
-playerHasPlayed(int pPlayerID)
-gameEnded()</string>
-     </void>
-    </void>
-    <void property="name">
-     <void property="text">
-      <string>«interface»
-GameObserver</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double11">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double11"/>
-      <double>1305.0</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double11"/>
-      <double>385.0</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1305.0</double>
-     <double>385.0</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
    <object class="com.horstmann.violet.ClassNode" id="ClassNode9">
     <void property="attributes">
      <void property="text">
       <string>- enum Phase
-- enum PlayerID
 - Stack&lt;Card&gt; aDiscardPile
 - boolean aP1IsDealer
 - Phase aTurnPhase
@@ -452,16 +414,16 @@ GameObserver</string>
     <void property="methods">
      <void property="text">
       <string>- GameEngine()
-+ void newGame(boolean pWithHuman, String P1Name, String P2Name)
++ void newGame(String P1Name, String P2Name)
 -------- PLAY METHODS --------
 + void discard(Player, Card)
 + Card DrawFromDeck(Player)
 + Card DrawFromDiscard(Player)
 --------- GET METHODS ---------
-+ Player getComputer()
-+ Player getPlayer(PlayerID pID)
++ Player getPlayer1()
++ Player getPlayer2()
 + Card getTopOfDiscardPile()
-+ GameEngine getInstance()
++ &lt;s&gt; GameEngine getInstance()
 ---- OBSERVER METHODS ----
 + void addObserver(Observer)
 + void removeObserver(Observer)
@@ -477,18 +439,18 @@ GameObserver</string>
      </void>
     </void>
    </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double12">
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double11">
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>x</string>
      <void method="set">
-      <object idref="Point2D$Double12"/>
+      <object idref="Point2D$Double11"/>
       <double>769.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
-      <object idref="Point2D$Double12"/>
+      <object idref="Point2D$Double11"/>
       <double>130.0</double>
      </void>
     </void>
@@ -500,35 +462,6 @@ GameObserver</string>
   </void>
   <void method="addNode">
    <object class="com.horstmann.violet.ClassNode" id="ClassNode10">
-    <void property="name">
-     <void property="text">
-      <string>GameLogger</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double13">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double13"/>
-      <double>1549.0</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double13"/>
-      <double>409.0</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1549.0</double>
-     <double>409.0</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode11">
     <void property="attributes">
      <void property="text">
       <string>- String aName
@@ -539,12 +472,12 @@ GameObserver</string>
     </void>
     <void property="methods">
      <void property="text">
-      <string>+ ArrayList&lt;Card&gt; getHand()
+      <string>+ Hand getHand()
 + String getName()
 + int getScore()
 + void addCard(Card)
 + boolean Discard(Card)
-+ iterator iterator()</string>
++ setScore(int)</string>
      </void>
     </void>
     <void property="name">
@@ -553,24 +486,24 @@ GameObserver</string>
      </void>
     </void>
    </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double14">
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double12">
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>x</string>
      <void method="set">
-      <object idref="Point2D$Double14"/>
-      <double>897.0</double>
+      <object idref="Point2D$Double12"/>
+      <double>820.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
-      <object idref="Point2D$Double14"/>
-      <double>619.0</double>
+      <object idref="Point2D$Double12"/>
+      <double>618.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>897.0</double>
-     <double>619.0</double>
+     <double>820.0</double>
+     <double>618.0</double>
     </void>
    </object>
   </void>
@@ -588,18 +521,18 @@ GameObserver</string>
      <object idref="Rectangle2D$Double0"/>
     </void>
    </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double15">
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double13">
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>x</string>
      <void method="set">
-      <object idref="Point2D$Double15"/>
+      <object idref="Point2D$Double13"/>
       <double>982.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
-      <object idref="Point2D$Double15"/>
+      <object idref="Point2D$Double13"/>
       <double>208.0</double>
      </void>
     </void>
@@ -610,10 +543,68 @@ GameObserver</string>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode12">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode11">
     <void property="name">
      <void property="text">
       <string>SystemLogger</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double14">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double14"/>
+      <double>1369.0</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double14"/>
+      <double>306.0</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>1369.0</double>
+     <double>306.0</double>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode12">
+    <void property="name">
+     <void property="text">
+      <string>CannotPerformActionException</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double15">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double15"/>
+      <double>1169.0</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double15"/>
+      <double>680.0</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>1169.0</double>
+     <double>680.0</double>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode13">
+    <void property="name">
+     <void property="text">
+      <string>SaveException</string>
      </void>
     </void>
    </object>
@@ -622,71 +613,13 @@ GameObserver</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double16"/>
-      <double>1552.0</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double16"/>
-      <double>301.0</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1552.0</double>
-     <double>301.0</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode13">
-    <void property="name">
-     <void property="text">
-      <string>CannotPerformActionException</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double17">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double17"/>
-      <double>1182.0</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double17"/>
-      <double>661.0</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1182.0</double>
-     <double>661.0</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode14">
-    <void property="name">
-     <void property="text">
-      <string>SaveException</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double18">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double18"/>
       <double>837.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
-      <object idref="Point2D$Double18"/>
+      <object idref="Point2D$Double16"/>
       <double>-4.0</double>
      </void>
     </void>
@@ -697,25 +630,25 @@ GameObserver</string>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode15">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode14">
     <void property="name">
      <void property="text">
       <string>LoadException</string>
      </void>
     </void>
    </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double19">
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double17">
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>x</string>
      <void method="set">
-      <object idref="Point2D$Double19"/>
+      <object idref="Point2D$Double17"/>
       <double>841.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
-      <object idref="Point2D$Double19"/>
+      <object idref="Point2D$Double17"/>
       <double>59.0</double>
      </void>
     </void>
@@ -825,36 +758,6 @@ GameObserver</string>
     </void>
    </object>
    <object idref="ClassNode9"/>
-   <object idref="InterfaceNode2"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.ClassRelationshipEdge">
-    <void property="bentStyle">
-     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
-    </void>
-    <void property="endArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
-    </void>
-    <void property="lineStyle">
-     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
-    </void>
-   </object>
-   <object idref="ClassNode10"/>
-   <object idref="InterfaceNode2"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.ClassRelationshipEdge">
-    <void property="bentStyle">
-     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
-    </void>
-    <void property="endLabel">
-     <string>*</string>
-    </void>
-    <void property="startArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="DIAMOND"/>
-    </void>
-   </object>
-   <object idref="ClassNode9"/>
    <object idref="InterfaceNode1"/>
   </void>
   <void method="connect">
@@ -907,6 +810,9 @@ GameObserver</string>
     <void property="endLabel">
      <string>1</string>
     </void>
+    <void property="middleLabel">
+     <string>aDeck</string>
+    </void>
     <void property="startArrowHead">
      <object class="com.horstmann.violet.ArrowHead" field="DIAMOND"/>
     </void>
@@ -922,11 +828,14 @@ GameObserver</string>
     <void property="endLabel">
      <string>1</string>
     </void>
+    <void property="middleLabel">
+     <string>aHand</string>
+    </void>
     <void property="startArrowHead">
      <object class="com.horstmann.violet.ArrowHead" field="DIAMOND"/>
     </void>
    </object>
-   <object idref="ClassNode11"/>
+   <object idref="ClassNode10"/>
    <object idref="ClassNode2"/>
   </void>
   <void method="connect">
@@ -937,12 +846,15 @@ GameObserver</string>
     <void property="endLabel">
      <string>2</string>
     </void>
+    <void property="middleLabel">
+     <string>aPlayer1, aPlayer2</string>
+    </void>
     <void property="startArrowHead">
      <object class="com.horstmann.violet.ArrowHead" field="DIAMOND"/>
     </void>
    </object>
    <object idref="ClassNode9"/>
-   <object idref="ClassNode11"/>
+   <object idref="ClassNode10"/>
   </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
@@ -956,7 +868,7 @@ GameObserver</string>
      <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
     </void>
    </object>
-   <object idref="ClassNode12"/>
+   <object idref="ClassNode11"/>
    <object idref="InterfaceNode1"/>
   </void>
   <void method="connect">
@@ -968,7 +880,19 @@ GameObserver</string>
      <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
     </void>
    </object>
-   <object idref="ClassNode11"/>
+   <object idref="ClassNode10"/>
+   <object idref="ClassNode12"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode8"/>
    <object idref="ClassNode13"/>
   </void>
   <void method="connect">
@@ -982,18 +906,6 @@ GameObserver</string>
    </object>
    <object idref="ClassNode8"/>
    <object idref="ClassNode14"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.ClassRelationshipEdge">
-    <void property="endArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="V"/>
-    </void>
-    <void property="lineStyle">
-     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
-    </void>
-   </object>
-   <object idref="ClassNode8"/>
-   <object idref="ClassNode15"/>
   </void>
  </object>
 </java>
