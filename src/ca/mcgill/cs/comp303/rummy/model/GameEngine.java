@@ -14,9 +14,6 @@ import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
  */
 public final class GameEngine implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3306656900603120034L;
 	private static GameEngine aGameInstance = new GameEngine();
 	
