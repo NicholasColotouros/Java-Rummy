@@ -21,8 +21,7 @@ public class BinarySerializer implements Serializer
 	@Override
 	public void save(GameEngine pEngine, String pPath) throws SaveException
 	{
-		ObjectOutputStream outStream =  null;
-		try
+		try(ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(pPath)))
 		{
 			// Delete the file if it already exists
 			File outputFile = new File(pPath);
@@ -31,7 +30,7 @@ public class BinarySerializer implements Serializer
 				outputFile.delete();
 			}
 	
-			outStream = new ObjectOutputStream(new FileOutputStream(pPath));
+			
 			outStream.writeObject(pEngine);
 			outStream.close();
 		}
@@ -45,27 +44,12 @@ public class BinarySerializer implements Serializer
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		finally
-		{
-			try
-			{
-				if(outStream != null)
-				{
-					outStream.close();					
-				}
-			}
-			catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
 
 	@Override
-	public GameEngine load(String pPath) throws LoadException
+	public  GameEngine load(String pPath) throws LoadException
 	{
-		try
+		try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(pPath)))
 		{
 			// If the file does not exist, throw an exception
 			if(!(new File(pPath).exists())) 
@@ -73,7 +57,7 @@ public class BinarySerializer implements Serializer
 				throw new LoadException("File does not exist.");
 			}
 			
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream(pPath));
+			
 			GameEngine ret = (GameEngine) in.readObject();
 			in.close();
 			return ret;
