@@ -424,6 +424,7 @@ Serializer</string>
 --------- GET METHODS ---------
 + Player getPlayer1()
 + Player getPlayer2()
++ Player getDealer
 + Card getTopOfDiscardPile()
 + &lt;s&gt; GameEngine getInstance()
 ---- OBSERVER METHODS ----
