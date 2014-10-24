@@ -99,7 +99,8 @@ Suit aSuit</string>
 + createRun(Set&lt;Card&gt;)
 + createGroup(Set&lt;Card&gt;)
 + automatch()
-+ iterator iterator()</string>
++ iterator iterator()
++ ArrayList&lt;Card&gt; getCards()</string>
      </void>
     </void>
     <void property="name">
@@ -255,19 +256,19 @@ ICardSet</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double6"/>
-      <double>625.0</double>
+      <double>1106.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double6"/>
-      <double>365.0</double>
+      <double>183.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>625.0</double>
-     <double>365.0</double>
+     <double>1106.0</double>
+     <double>183.0</double>
     </void>
    </object>
   </void>
@@ -374,7 +375,7 @@ SystemObserver</string>
     </void>
     <void property="name">
      <void property="text">
-      <string>&lt;&lt; Interfface &gt;&gt;
+      <string>&lt;&lt; Interface &gt;&gt;
 Serializer</string>
      </void>
     </void>
@@ -658,6 +659,65 @@ Serializer</string>
     </void>
    </object>
   </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.InterfaceNode" id="InterfaceNode2">
+    <void property="name">
+     <void property="text">
+      <string>«interface»
+RummyBot</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double18">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double18"/>
+      <double>1238.0</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double18"/>
+      <double>180.0</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>1238.0</double>
+     <double>180.0</double>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode15">
+    <void property="name">
+     <void property="text">
+      <string>RandomBot</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double19">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double19"/>
+      <double>1368.0</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double19"/>
+      <double>184.0</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>1368.0</double>
+     <double>184.0</double>
+    </void>
+   </object>
+  </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
     <void property="bentStyle">
@@ -906,6 +966,33 @@ Serializer</string>
    </object>
    <object idref="ClassNode8"/>
    <object idref="ClassNode14"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode5"/>
+   <object idref="InterfaceNode2"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode15"/>
+   <object idref="InterfaceNode2"/>
   </void>
  </object>
 </java>
