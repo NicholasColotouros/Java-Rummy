@@ -431,8 +431,8 @@ Serializer</string>
 + void removeObserver(Observer)
 - void notifyObservers()
 -------- SAVE METHODS -------
-+ save(Serializer, String)
-+ load(Serializer, String)</string>
++ &lt;s&gt; save(Serializer, String)
++ &lt;s&gt; load(Serializer, String)</string>
      </void>
     </void>
     <void property="name">

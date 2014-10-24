@@ -157,9 +157,9 @@ public final class GameEngine implements Serializable
 	 * @param pPath the full path to save the game
 	 * @throws SaveException thrown when something goes wrong during saving 
 	 */
-	public void save(Serializer pSerializer, String pPath) throws SaveException
+	public static void save(Serializer pSerializer, String pPath) throws SaveException
 	{
-		pSerializer.save(this, pPath);
+		pSerializer.save(aGameInstance, pPath);
 	}
 	
 	/**
@@ -168,7 +168,7 @@ public final class GameEngine implements Serializable
 	 * @param pPath the full path to load the game
 	 * @throws LoadException thrown when something goes wrong during loading 
 	 */
-	public void load(Serializer pSerializer, String pPath) throws LoadException
+	public static void load(Serializer pSerializer, String pPath) throws LoadException
 	{
 		aGameInstance = pSerializer.load(pPath);
 		// TODO: update the rest and get things going from where things were left off
