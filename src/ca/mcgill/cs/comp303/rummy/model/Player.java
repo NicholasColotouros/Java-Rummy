@@ -3,6 +3,7 @@ package ca.mcgill.cs.comp303.rummy.model;
 import java.io.Serializable;
 import java.util.Iterator;
 
+import ca.mcgill.cs.comp303.rummy.exceptions.CannotDiscardException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 
 /**
@@ -30,9 +31,18 @@ public class Player implements Serializable
 	/**
 	 * Adds a card to the players hand.
 	 * @param pCard the card to be added
+	 * @throws CannotPerformActionException if a null card is passed or a duplicate card is passed
 	 */
-	public void addCard(Card pCard)
+	public void addCard(Card pCard) throws CannotPerformActionException
 	{
+		if(aHand.contains(pCard))
+		{
+			throw new CannotPerformActionException("Cannot add a card already in the hand.");
+		}
+		if(pCard == null) 
+		{
+			throw new CannotPerformActionException("Cannot add null card to player hand.");
+		}
 		aHand.add(pCard);
 		aLastCardDrawn = pCard;
 	}
@@ -41,13 +51,13 @@ public class Player implements Serializable
 	 * Discards the specified card from the hand if it exists. 
 	 * @param pCard the card to discard.
 	 * @return true if the card was successfully removed. False if the card does not exist in the hand
-	 * @throws CannotPerformActionException if the card that is going to be discarded was the last card to be drawn
+	 * @throws CannotDiscardException if the card that is going to be discarded was the last card to be drawn
 	 */
-	public boolean discard(Card pCard) throws CannotPerformActionException
+	public boolean discard(Card pCard) throws CannotDiscardException
 	{
 		if(pCard.equals(aLastCardDrawn)) 
 		{
-			throw new CannotPerformActionException("Cannot discard the last card drawn.");
+			throw new CannotDiscardException("Cannot discard the last card drawn.");
 		}
 		if(aHand.contains(pCard))
 		{
