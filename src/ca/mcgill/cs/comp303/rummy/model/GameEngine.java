@@ -23,8 +23,7 @@ public final class GameEngine implements Serializable
 	private enum GamePhase
 	{
 		UNINITIALIZED, FIRSTDRAW, 
-		P1DRAW, P1DISCARD, 
-		P2DRAW, P2DISCARD, 
+		DRAW, DISCARD,
 		ENDGAME
 	};
 	
@@ -61,6 +60,7 @@ public final class GameEngine implements Serializable
 		reset();
 		aPlayer1 = new Player(pP1Name);
 		aPlayer2 = new Player(pP2Name);
+		aPhase = GamePhase.FIRSTDRAW;
 	}
 	
 	/**
@@ -75,6 +75,9 @@ public final class GameEngine implements Serializable
 		{
 			aDiscardPile.push(pCard);
 		}
+		
+		// Next phase is the draw phase
+		aPhase = GamePhase.DRAW;
 	}
 	
 	/**
@@ -89,6 +92,9 @@ public final class GameEngine implements Serializable
 			throw new CannotDrawException("Cannot draw from deck: ");
 		}
 		pPlayer.addCard(aDeck.draw());
+		
+		// Next phase is discard
+		aPhase = GamePhase.DISCARD;
 	}
 	
 	/**
@@ -103,6 +109,9 @@ public final class GameEngine implements Serializable
 			throw new CannotDrawException("Cannot draw from discard pile: no cards to draw.");
 		}
 		pPlayer.addCard(aDiscardPile.pop());
+
+		// Next phase is discard
+		aPhase = GamePhase.DISCARD;
 	}
 	
 	/**
