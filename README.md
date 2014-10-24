@@ -22,10 +22,14 @@ The rules that will be used for this implementation of the game can be found [he
 
 
 ###MILESTONE 1:
-1. Complete the implementation of the autoMatch method. This method must always complete in less than 0.1 second.
+1. Complete the implementation of the autoMatch method. This method must always complete in less than 0.1 second... say it has to be O(2^n) where n is the number of cards in the hand.
 2. Complete all the test classes and use EclEmma to ensure you achieve 100% statement coverage. You may want to consider implementing a small code generator to generate tests for automatch.
 3. Make sure all your code respects the style guidelines
 
 ###MILESTONE 2:
-Finalize design of Milestone 2 specs using class, state and sequence diagrams as per M2 design specs (see milestone2 instructions HTML file)
-* Implement it
+1. Define the RummyBot interface
+2. Design the Driver (will likely go hand in hand with the above)
+3. Decide on Exceptions vs return types for performing actions that shouldn't be possible to do (ie drawing from an empty discard pile).
+4. Implement the loggers. I'm not convinced Observer is the way to go for logging.
+5. Implement and test functionality
+6. Take care of any tasks labelled TODO in eclipse (to see them, look at the menu bar in eclipse. Click Window -> show view -> tasks).
