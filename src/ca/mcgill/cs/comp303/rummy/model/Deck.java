@@ -10,7 +10,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card.Suit;
 /**
  * Models a deck of 52 cards (no joker).
  */
-public class Deck implements Serializable
+public class Deck  implements Serializable
 {
 	private Stack<Card> aCards;
 	

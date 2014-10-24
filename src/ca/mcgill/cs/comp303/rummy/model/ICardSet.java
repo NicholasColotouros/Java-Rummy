@@ -1,11 +1,9 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
-import java.io.Serializable;
-
 /**
  * Implementors of this class should be immutable.
  */
-public interface ICardSet extends Iterable<Card>, Serializable
+public interface ICardSet extends Iterable<Card>
 {
 	/**
 	 * @param pCard A card to check

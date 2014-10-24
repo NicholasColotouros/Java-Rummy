@@ -90,16 +90,9 @@ public final class GameEngine implements Serializable
 	{
 		if(aDeck.size() < 2)
 		{
-			throw new CannotDrawException("Cannot draw from deck: less than 2 cards left in deck.");
+			throw new CannotDrawException("Cannot draw from deck: ");
 		}
-		try
-		{
-			pPlayer.addCard(aDeck.draw());
-		}
-		catch (CannotPerformActionException e)
-		{
-			throw new CannotDrawException("Cannot draw from deck: Added duplicate card to hand.");
-		}
+		pPlayer.addCard(aDeck.draw());
 		
 		// Next phase is discard
 		aPhase = GamePhase.DISCARD;
@@ -116,14 +109,7 @@ public final class GameEngine implements Serializable
 		{
 			throw new CannotDrawException("Cannot draw from discard pile: no cards to draw.");
 		}
-		try
-		{
-			pPlayer.addCard(aDiscardPile.pop());
-		}
-		catch (CannotPerformActionException e)
-		{
-			throw new CannotDrawException("Cannot draw from deck: Added duplicate card to hand.");
-		}
+		pPlayer.addCard(aDiscardPile.pop());
 
 		// Next phase is discard
 		aPhase = GamePhase.DISCARD;
@@ -145,37 +131,6 @@ public final class GameEngine implements Serializable
 		// then based on who has the better score, update the players score appropriately
 		
 		aPhase = GamePhase.ENDGAME;
-	}
-	
-	/**
-	 * Returns player 1, who is the human player in one player games.
-	 * @return player 1
-	 */
-	public Player getPlayer1()
-	{
-		return aPlayer1;
-	}
-	
-	/**
-	 * Returns player 2.
-	 * @return player 2
-	 */
-	public Player getPlayer2()
-	{
-		return aPlayer2;
-	}
-	
-	/**
-	 * Returns the dealer.
-	 * @return the dealer
-	 */
-	public Player getDealer()
-	{
-		if(aP1IsDealer) 
-		{
-			return aPlayer1;
-		}
-		return aPlayer2;
 	}
 	
 	/**
