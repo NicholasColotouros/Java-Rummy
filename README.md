@@ -35,7 +35,7 @@ The rules that will be used for this implementation of the game can be found [he
 6. Take care of any tasks labelled TODO in eclipse (to see them, look at the menu bar in eclipse. Click Window -> show view -> tasks).
 
 ###MILESTONE 3:
-!(M3 is coming)[http://i.imgur.com/YVEq6MX.png]
+!(alt tag)[http://i.imgur.com/YVEq6MX.png]
 
 ### (Optional) Post final goals
 * Complete unimplemented methods
