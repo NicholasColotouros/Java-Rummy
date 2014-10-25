@@ -210,6 +210,14 @@ public final class GameEngine extends Observable implements Serializable
 	}
 	
 	/**
+	 * The number of cards left in the deck.
+	 * @return the number of cards left in the deck.
+	 */
+	public int getDeckSize()
+	{
+		return aDeck.size();
+	}
+	/**
 	 * Saves the game.
 	 * @param pSerializer the format for which to implement the serializer
 	 * @param pPath the full path to save the game
