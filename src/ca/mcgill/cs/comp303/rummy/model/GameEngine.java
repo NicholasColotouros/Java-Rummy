@@ -66,11 +66,10 @@ public final class GameEngine extends Observable implements Serializable
 	
 	/**
 	 * Starts a new game.
-	 * @param pTwoAIs true means the computer will be playing against another computer, flase means player 1 is a human player.
 	 * @param pP1Name Player 1s name
 	 * @param pP2Name Player 2s name
 	 */
-	public void newGame(boolean pTwoAIs, String pP1Name, String pP2Name)
+	public void newGame(String pP1Name, String pP2Name)
 	{
 		reset();
 		aPlayer1 = new Player(pP1Name);
