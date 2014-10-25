@@ -1,6 +1,7 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
 import java.io.Serializable;
+import java.util.Observable;
 import java.util.Stack;
 
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotDrawException;
@@ -13,7 +14,7 @@ import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
 /**
  * The heart and soul of the game. Responsible for managing the game.
  */
-public final class GameEngine implements Serializable
+public final class GameEngine extends Observable implements Serializable
 {
 	private static final long serialVersionUID = 3306656900603120034L;
 	private static GameEngine aGameInstance = new GameEngine();
@@ -42,12 +43,25 @@ public final class GameEngine implements Serializable
 		reset();
 	}
 	
-	private void reset()
+	/**
+	 * Resets the game. The players stay the same and keep their scores.
+	 */
+	public void reset()
 	{
 		aPhase = GamePhase.UNINITIALIZED;
 		aDeck = new Deck();
 		aDiscardPile = new Stack<Card>();
 		aP1IsDealer = false;
+		
+		if(aPlayer1 != null)
+		{
+			aPlayer1.discardHand();
+		}
+		
+		if(aPlayer2 != null)
+		{
+			aPlayer2.discardHand();
+		}
 	}
 	
 	/**

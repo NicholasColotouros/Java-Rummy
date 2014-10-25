@@ -68,6 +68,14 @@ public class Player implements Serializable
 	}
 	
 	/**
+	 * Discards all cards in the hand. Should be used for starting a new round.
+	 */
+	public void discardHand()
+	{
+		aHand.clear();
+	}
+	
+	/**
 	 * Gets the name of the player.
 	 * @return the name of the player.
 	 */
