@@ -22,6 +22,13 @@ public class M2Driver
 			// Start of game
 			game.newGame("HAL 9000", "HAL 9001");
 			
+			while(game.getDeckSize() > 2)
+			{
+				// TODO: firstDeal
+				// TODO: proceed with game
+			}
+			
+			
 			// TODO: play the games
 			// When drawing, add the last card to the end of the hand, and then sort only AFTER discard
 		}
