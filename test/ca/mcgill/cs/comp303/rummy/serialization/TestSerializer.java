@@ -27,7 +27,7 @@ public class TestSerializer
 	@Before
 	public void setUp()
 	{
-		aEngine.newGame(false, "Jack", "Jill");
+		aEngine.newGame("Jack", "Jill");
 	}
 	
 	/**
