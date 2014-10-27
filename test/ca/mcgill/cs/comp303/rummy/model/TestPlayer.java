@@ -30,7 +30,7 @@ public class TestPlayer
 	@Before
 	public void setUp()
 	{
-		aP1 = new Player("SmartAss");
+		aP1 = new Player("Smart Ass");
 		aC1 = new Card(Card.Rank.FIVE, Card.Suit.DIAMONDS);
 		aC2 = new Card(Card.Rank.FIVE, Card.Suit.DIAMONDS);
 		aC3 = new Card(Card.Rank.ACE, Card.Suit.SPADES);
@@ -59,6 +59,7 @@ public class TestPlayer
 		}
 	}
 	
+
 	/**
 	 * 
 	 */
@@ -119,4 +120,5 @@ public class TestPlayer
 		assertTrue(aP1.getScore() == 0);		
 	}
 	
+
 }
