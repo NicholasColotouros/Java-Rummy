@@ -3,6 +3,8 @@ package ca.mcgill.cs.comp303.rummy.model;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Stack;
+import java.util.ArrayList;
+import java.util.logging.Level;
 
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotDrawException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotKnockException;
@@ -18,6 +20,7 @@ public final class GameEngine extends Observable implements Serializable
 {
 	private static final long serialVersionUID = 3306656900603120034L;
 	private static GameEngine aGameInstance = new GameEngine();
+	private static ArrayList<ILoggerObserver> aObservers;
 	
 	/**
 	 * Represents the state of the game.  
@@ -92,6 +95,9 @@ public final class GameEngine extends Observable implements Serializable
 		
 		// Next phase is the draw phase
 		aPhase = GamePhase.DRAW;
+		
+		//update loggers
+		
 	}
 	
 	/**
@@ -238,5 +244,19 @@ public final class GameEngine extends Observable implements Serializable
 	{
 		aGameInstance = pSerializer.load(pPath);
 		// TODO: update the rest and get things going from where things were left off
+	}
+	
+	/**
+	 * Update all observers
+	 * @param pPriority the priority of the message
+	 * @param pMessage the message
+	 * 
+	 */
+	private static void updateLoggerObservers(Level pPriority, String pMessage)
+	{
+		for(ILoggerObserver o: aObservers)
+		{
+			o.update(pPriority, pMessage);
+		}
 	}
 }
