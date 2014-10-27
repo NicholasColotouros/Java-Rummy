@@ -1,10 +1,14 @@
 package ca.mcgill.cs.comp303.rummy.model;
 import ca.mcgill.cs.comp303.rummy.exceptions.*;
 
+
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 
 
 /**
@@ -47,7 +51,7 @@ public class TestPlayer
 		}
 		catch(CannotPerformActionException e)
 		{
-			fail(CannotPerformActionException);
+			fail("testAddCard failed: " + e.getClass().toString());
 		}
 		finally
 		{
@@ -67,7 +71,7 @@ public class TestPlayer
 		}
 		catch(CannotDiscardException e)
 		{
-			fail(CannotDiscardException);
+			fail("ttDiscard failed: " + e.getClass().toString());
 		}
 		finally
 		{
@@ -81,12 +85,20 @@ public class TestPlayer
 	@Test
 	public void testDiscardHand()
 	{	
-		
-		aP1.addCard(aC2);	
-		aP1.addCard(aC3);	
-		aP1.addCard(aC4);	
-
-		assertTrue(aP1.getHand().size() == 0);		
+		try
+		{
+			aP1.addCard(aC2);	
+			aP1.addCard(aC3);	
+			aP1.addCard(aC4);	
+		}
+		catch(CannotPerformActionException e)
+		{
+			fail( "testDiscardHand failed: " + e.getClass().toString());
+		}
+		finally
+		{
+			assertTrue(aP1.getHand().size() == 0);	
+		}	
 	}
 	
 	/**
@@ -95,7 +107,7 @@ public class TestPlayer
 	@Test
 	public void testGetName()
 	{	
-		assertTrue(aP1.getName() == "SmartAss");		
+		assertTrue("SmartAss".equals(aP1.getName()));		
 	}
 	
 	/**
