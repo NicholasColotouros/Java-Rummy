@@ -1,4 +1,4 @@
-package ca.mcgill.cs.comp303.rummy.model;
+package ca.mcgill.cs.comp303.rummy.logging;
 
 import java.util.logging.Level;
 

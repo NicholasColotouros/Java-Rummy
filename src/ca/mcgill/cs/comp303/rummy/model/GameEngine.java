@@ -11,6 +11,7 @@ import ca.mcgill.cs.comp303.rummy.exceptions.CannotKnockException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 import ca.mcgill.cs.comp303.rummy.exceptions.LoadException;
 import ca.mcgill.cs.comp303.rummy.exceptions.SaveException;
+import ca.mcgill.cs.comp303.rummy.logging.ILoggerObserver;
 import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
 
 /**
