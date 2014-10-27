@@ -65,6 +65,11 @@ public final class GameEngine extends Observable implements Serializable
 		{
 			aPlayer2.discardHand();
 		}
+		
+		//update loggers
+		String aMessage = "resets the game";
+		updateLoggerObservers(Level.INFO,aMessage);	
+		
 	}
 	
 	/**
@@ -97,6 +102,8 @@ public final class GameEngine extends Observable implements Serializable
 		aPhase = GamePhase.DRAW;
 		
 		//update loggers
+		String aMessage = "Player " + pPlayer.toString() + "discards" + pCard.toString();
+		updateLoggerObservers(Level.INFO,aMessage);	
 		
 	}
 	
@@ -107,13 +114,16 @@ public final class GameEngine extends Observable implements Serializable
 	 */
 	public void drawFromDeck(Player pPlayer) throws CannotDrawException
 	{
+		Card tmp;
+		
 		if(aDeck.size() < 2)
 		{
 			throw new CannotDrawException("Cannot draw from deck: less than 2 cards left in deck.");
 		}
 		try
 		{
-			pPlayer.addCard(aDeck.draw());
+			tmp = aDeck.draw();
+			pPlayer.addCard(tmp);
 		}
 		catch (CannotPerformActionException e)
 		{
@@ -122,6 +132,10 @@ public final class GameEngine extends Observable implements Serializable
 		
 		// Next phase is discard
 		aPhase = GamePhase.DISCARD;
+		
+		//update loggers
+		String aMessage = "Player " + pPlayer.toString() + " draws from deck " + tmp.toString();
+		updateLoggerObservers(Level.INFO,aMessage);	
 	}
 	
 	/**
@@ -131,13 +145,16 @@ public final class GameEngine extends Observable implements Serializable
 	 */
 	public void drawFromDiscardPile(Player pPlayer) throws CannotDrawException
 	{
+		Card tmp;
+		
 		if(aDiscardPile.isEmpty()) 
 		{
 			throw new CannotDrawException("Cannot draw from discard pile: no cards to draw.");
 		}
 		try
 		{
-			pPlayer.addCard(aDiscardPile.pop());
+			tmp = aDiscardPile.pop();
+			pPlayer.addCard(tmp);
 		}
 		catch (CannotPerformActionException e)
 		{
@@ -146,6 +163,10 @@ public final class GameEngine extends Observable implements Serializable
 
 		// Next phase is discard
 		aPhase = GamePhase.DISCARD;
+		
+		//update loggers
+		String aMessage = "Player " + pPlayer.toString() + " draws from discrad pile " + tmp.toString();
+		updateLoggerObservers(Level.INFO,aMessage);	
 	}
 	
 	/**
@@ -164,6 +185,10 @@ public final class GameEngine extends Observable implements Serializable
 		// then based on who has the better score, update the players score appropriately
 		
 		aPhase = GamePhase.ENDGAME;
+		
+		//update loggers
+		String aMessage = "Player"+ pPlayer + "knocks";
+		updateLoggerObservers(Level.INFO,aMessage);	
 	}
 	
 	/**
@@ -247,7 +272,8 @@ public final class GameEngine extends Observable implements Serializable
 	}
 	
 	/**
-	 * Update all observers
+	 * Update all observers for the following actions: reset, discard, drawFromDeck,
+	 * drawFromDiscardPile,knocks.
 	 * @param pPriority the priority of the message
 	 * @param pMessage the message
 	 * 
