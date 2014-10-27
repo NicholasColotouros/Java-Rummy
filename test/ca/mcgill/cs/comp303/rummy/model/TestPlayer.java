@@ -1,10 +1,12 @@
 package ca.mcgill.cs.comp303.rummy.model;
-package ca.mcgill.cs.comp303.rummy.exceptions.*;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 
 
 /**
@@ -43,7 +45,7 @@ public class TestPlayer
 		}
 		catch(CannotPerformActionException e)
 		{
-			fail(CannotPerformActionException);
+			fail("testAddCard failed: " + e.getClass().toString());
 		}
 		finally
 		{
