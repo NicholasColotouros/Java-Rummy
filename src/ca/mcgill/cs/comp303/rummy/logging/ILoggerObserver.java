@@ -12,5 +12,5 @@ public interface ILoggerObserver
 	 * @param pMessage the message
 	 *
 	 */ 
-	void update(Level pPriority, String pMessage);	
+	void updateLoggerObservers(Level pPriority, String pMessage);	
 }
