@@ -35,7 +35,24 @@ The rules that will be used for this implementation of the game can be found [he
 6. Take care of any tasks labelled TODO in eclipse (to see them, look at the menu bar in eclipse. Click Window -> show view -> tasks).
 
 ###MILESTONE 3:
-![Prepare Yourselves](http://i.imgur.com/YVEq6MX.png)
+* Create all of the user interface elements required for multiple games
+* Create the user interface elements required to save and load the game
+* Log game events and errors to a log file
+* Implement the GUI panels as observers of the game Engine
+* Implement the application within a single JFrame: the only additional windows should be modal dialog boxies
+  * In other words, the only other windows are:
+   1. The startup window (load game or new game)
+   2. The window asking the user how many games they want to play (new game)
+   3. When the user has to specify where to save/load the game
+* Externalize the strings (internationalization)
+  * Possibly ask for languages on startup
+* When the application works, package it as a self executing .jar file
+
+  #### Notes on milestone 3:
+  * Try to avoid implementing your own concurrent code
+  * Make the whole UI functional before making it nice
+  * Something something prof clearly wants us to use TaskNav
+
 
 ### (Optional) Post final goals
 * Complete unimplemented methods
