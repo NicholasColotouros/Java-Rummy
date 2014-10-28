@@ -51,7 +51,7 @@ The rules that will be used for this implementation of the game can be found [he
   #### Notes on milestone 3:
   * Try to avoid implementing your own concurrent code
   * Make the whole UI functional before making it nice
-  * Something something prof clearly wants us to use TaskNav
+  * Prof clearly wants us to use TaskNav to look things up for GUI
 
 
 ### (Optional) Post final goals
