@@ -13,10 +13,11 @@ public class ConsoleLogger implements ILoggerObserver
 	
 	/**
 	 * Default constructor.
+	 * @param pName the name of the logger.
 	 */
-	public ConsoleLogger()
+	public ConsoleLogger(String pName)
 	{
-		// TODO: initialize
+		aLogger = Logger.getLogger(pName);
 	}
 	@Override
 	public void updateLoggerObservers(Level pPriority, String pMessage)
