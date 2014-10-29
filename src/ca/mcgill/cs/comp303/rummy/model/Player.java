@@ -101,4 +101,13 @@ public class Player implements Serializable
 	{
 		return aHand;
 	}
+	
+	/**
+	 * Adds points to the players score.
+	 * @param pAddPoints the number of points to add.
+	 */
+	public void incrementScore(int pAddPoints)
+	{
+		aScore += pAddPoints;
+	}
 }

@@ -28,9 +28,7 @@ public final class GameEngine extends Observable implements Serializable
 	 */
 	private enum GamePhase
 	{
-		UNINITIALIZED, FIRSTDRAW, 
-		DRAW, DISCARD,
-		ENDGAME
+		FIRSTDRAW, DRAW, DISCARD, ENDGAME
 	};
 	
 	private GamePhase aPhase;
@@ -52,7 +50,6 @@ public final class GameEngine extends Observable implements Serializable
 	 */
 	public void reset()
 	{
-		aPhase = GamePhase.UNINITIALIZED;
 		aDeck = new Deck();
 		aDeck.shuffle();
 		
@@ -81,6 +78,7 @@ public final class GameEngine extends Observable implements Serializable
 				logEvent(Level.SEVERE, "Draw failed during reset.");
 			}
 		}
+		aPhase = GamePhase.FIRSTDRAW;
 		logEvent(Level.INFO, "Starting new round.");	
 	}
 	
@@ -91,10 +89,9 @@ public final class GameEngine extends Observable implements Serializable
 	 */
 	public void newGame(String pP1Name, String pP2Name)
 	{
-		reset();
 		aPlayer1 = new Player(pP1Name);
 		aPlayer2 = new Player(pP2Name);
-		aPhase = GamePhase.FIRSTDRAW;
+		reset();
 		
 		logEvent(Level.INFO, "Starting new game.");			
 	}
@@ -201,14 +198,51 @@ public final class GameEngine extends Observable implements Serializable
 			throw new CannotKnockException("Player " + pPlayer.getName() + " cannot knock. Too much deadwood");
 		}
 		
-		// TODO: Run the new version of automatch, which calculates the optimal scores for both players,
+		int p1Score = 0;
+		int p2Score = 0;
+		// TODO: Run the new version of automatch, which calculates the optimal scores for both players
 		// then based on who has the better score, update the players score appropriately
 		
 		aPhase = GamePhase.ENDGAME;
 		
 		//update loggers
-		String aMessage = "Player"+ pPlayer + "knocks";
-		logEvent(Level.INFO, aMessage);	
+		String message = "Player "+ pPlayer + " knocks.\n";
+		String messsge2 = aPlayer1.getName() + " has a score of " + aPlayer1.getHand().score() + "\n";
+		String message3 = aPlayer2.getName() + " has a score of " + aPlayer2.getHand().score() + "\n";
+		logEvent(Level.INFO, message);	
+		logEvent(Level.INFO, messsge2);
+		logEvent(Level.INFO, message3);
+		
+		// determine winner, set the dealer for the new round, update the scores
+		int scoreDifference = Math.abs(p1Score - p2Score);
+		if(p1Score > p2Score)
+		{
+			aPlayer1.incrementScore(scoreDifference);
+			aP1IsDealer = true;
+			
+			logEvent(Level.INFO, "Player: " + aPlayer1.getName() + " wins and gains " + scoreDifference + " points.");
+		}
+		else if(p1Score < p2Score)
+		{
+			aPlayer2.incrementScore(scoreDifference);
+			aP1IsDealer = false;
+			
+			logEvent(Level.INFO, "Player: " + aPlayer2.getName() + " wins and gains " + scoreDifference + " points.");			
+		}
+		
+		else
+		{
+			logEvent(Level.INFO, "Game tied.");
+		}
+	}
+	
+	/**
+	 * Get the current game phase.
+	 * @return the game phase.
+	 */
+	public GamePhase getPhase()
+	{
+		return aPhase;
 	}
 	
 	/**
