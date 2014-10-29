@@ -54,6 +54,8 @@ public final class GameEngine extends Observable implements Serializable
 	{
 		aPhase = GamePhase.UNINITIALIZED;
 		aDeck = new Deck();
+		aDeck.shuffle();
+		
 		aDiscardPile = new Stack<Card>();
 		aP1IsDealer = false;
 		
@@ -67,9 +69,23 @@ public final class GameEngine extends Observable implements Serializable
 			aPlayer2.discardHand();
 		}
 		
+		for(int i = 0; i < 10; i++)
+		{
+			try
+			{
+				aPlayer1.addCard(aDeck.draw());
+				aPlayer2.addCard(aDeck.draw());
+			}
+			catch (CannotPerformActionException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		//update loggers
-		String aMessage = "resets the game";
-		updateLoggerObservers(Level.INFO,aMessage);	
+		String aMessage = "Starting new round.";
+		updateLoggerObservers(Level.INFO, aMessage);	
 		
 	}
 	
