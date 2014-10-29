@@ -283,7 +283,7 @@ public final class GameEngine extends Observable implements Serializable
 	{
 		for(ILoggerObserver o: aObservers)
 		{
-			//o.update(pPriority, pMessage);
+			o.update(pPriority, pMessage);
 		}
 	}
 }
