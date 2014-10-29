@@ -23,6 +23,8 @@ public class BinarySerializer implements Serializer
 	{
 		try(ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(pPath)))
 		{
+			// TODO: check if the file name and directory are valid
+			
 			// Delete the file if it already exists
 			File outputFile = new File(pPath);
 			if(outputFile.exists())
@@ -36,13 +38,11 @@ public class BinarySerializer implements Serializer
 		}
 		catch (FileNotFoundException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SaveException("File not found.");
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SaveException("Error: could not save");
 		}
 	}
 
@@ -59,20 +59,11 @@ public class BinarySerializer implements Serializer
 			
 			
 			GameEngine ret = (GameEngine) in.readObject();
-			in.close();
 			return ret;
 		}
-		catch (IOException e)
+		catch (IOException | ClassNotFoundException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return null; // TODO test these things
+			throw new LoadException("Error: could not load");
+		}		
 	}
 }

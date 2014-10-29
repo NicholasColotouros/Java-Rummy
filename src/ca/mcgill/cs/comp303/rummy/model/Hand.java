@@ -24,17 +24,6 @@ public class Hand implements Serializable
 	private ArrayList<ICardSet> aRuns;
 	private ArrayList<ICardSet> aGroups;
 	
-	
-	/**
-	 * Copy Constructor.
-	 * @param pHand the hand to be copied
-	 */
-	public Hand(Hand pHand)
-	{
-		aCards = pHand.getCards();
-		// TODO finish copying all of the fields
-	}
-	
 	/**
 	 * Creates a new, empty hand.
 	 */
