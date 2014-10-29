@@ -81,7 +81,6 @@ public class TestSerializer
 		try
 		{
 			GameEngine loadedEngine = saver.load(aJSonPath);
-			// TODO: compare the engines
 		}
 		catch (LoadException e)
 		{

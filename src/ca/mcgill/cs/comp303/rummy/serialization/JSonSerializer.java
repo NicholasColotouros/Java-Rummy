@@ -24,6 +24,8 @@ public class JSonSerializer implements Serializer
 	@Override
 	public void save(GameEngine pEngine, String pPath) throws SaveException
 	{
+		// TODO check if the name and directory are valid
+		
 		try(BufferedWriter out = new BufferedWriter(new FileWriter(pPath)))
 		{
 			File file = new File(pPath);
@@ -59,8 +61,7 @@ public class JSonSerializer implements Serializer
 		}
 		catch (FileNotFoundException e)
 		{
-			// should not happen
-			e.printStackTrace();
+			throw new LoadException("File not found");
 		}
 		catch (IOException e)
 		{
@@ -70,7 +71,6 @@ public class JSonSerializer implements Serializer
 		{
 			throw new LoadException("Corrupt file: unable to read from Json.");
 		}
-		return null;
 	}
 	
 }

@@ -61,6 +61,10 @@ public class BinarySerializer implements Serializer
 			GameEngine ret = (GameEngine) in.readObject();
 			return ret;
 		}
+		catch (FileNotFoundException e)
+		{
+			throw new LoadException("File not found");
+		}
 		catch (IOException | ClassNotFoundException e)
 		{
 			throw new LoadException("Error: could not load");
