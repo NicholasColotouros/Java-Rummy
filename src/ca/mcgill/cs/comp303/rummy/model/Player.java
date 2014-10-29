@@ -99,6 +99,6 @@ public class Player implements Serializable
 	 */
 	public Hand getHand()
 	{
-		return new Hand(aHand);
+		return aHand;
 	}
 }

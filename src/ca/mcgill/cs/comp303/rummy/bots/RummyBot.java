@@ -7,7 +7,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card;
 /**
  * The interface that the game AI will use.
  */
-public interface RummyBot extends Observer
+public interface RummyBot
 {
 	/**
 	 * Decides if the AI wants to draw from the deck or the discard pile .

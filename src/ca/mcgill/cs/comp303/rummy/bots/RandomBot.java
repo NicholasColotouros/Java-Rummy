@@ -3,12 +3,14 @@ package ca.mcgill.cs.comp303.rummy.bots;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
+import java.util.Set;
 
 import ca.mcgill.cs.comp303.rummy.model.Card;
 import ca.mcgill.cs.comp303.rummy.model.Hand;
 
 /**
  * Random bot does all random moves and knocks when possible.
+ * Discards a randomly unmatched card.
  */
 public class RandomBot implements RummyBot
 {
@@ -23,19 +25,6 @@ public class RandomBot implements RummyBot
 	{
 		aHand = pHand;
 	}
-	
-	/**
-	 * Updates the hand at the start of the turn.
-	 * @param pModel the model
-	 * @param pArgument the hand
-	 */
-	public void update(Observable pModel, Object pArgument)
-	{
-		if(pArgument instanceof Hand)
-		{
-			aHand = (Hand) pArgument;
-		}
-	}
 
 	@Override
 	public boolean drawFromDeck()
@@ -46,8 +35,13 @@ public class RandomBot implements RummyBot
 	@Override
 	public Card discard()
 	{
-		ArrayList<Card> cards = aHand.getCards();
-		return cards.get(aRandom.nextInt() % cards.size() - 1);
+		Card[] unmatched = (Card[]) aHand.getUnmatchedCards().toArray();
+		if(unmatched.length == 0)
+		{
+			return unmatched[aRandom.nextInt() % unmatched.length];
+		}
+		
+		return aHand.getCards().get(aRandom.nextInt() % aHand.size());
 	}
 
 	@Override
