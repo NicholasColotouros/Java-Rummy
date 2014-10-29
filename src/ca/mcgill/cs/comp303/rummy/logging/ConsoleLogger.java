@@ -21,7 +21,7 @@ public class ConsoleLogger implements ILoggerObserver
 		aLogger.info(pName + ": logger initialized");
 	}
 	@Override
-	public void updateLoggerObservers(Level pPriority, String pMessage)
+	public void logEvent(Level pPriority, String pMessage)
 	{
 		aLogger.log(pPriority, pMessage);
 	}

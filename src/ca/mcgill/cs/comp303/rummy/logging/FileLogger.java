@@ -48,13 +48,13 @@ public class FileLogger implements ILoggerObserver
 	        aLogger.info(pName + ": logger initialized.");
 		}
 		catch (SecurityException e) 
-		{  
+		{
 	        e.printStackTrace();  
 	    } 
 	}
 
 	@Override
-	public void updateLoggerObservers(Level pPriority, String pMessage)
+	public void logEvent(Level pPriority, String pMessage)
 	{
 		aLogger.log(pPriority, pMessage);
 	}
