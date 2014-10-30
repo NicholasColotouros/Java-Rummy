@@ -1,9 +1,6 @@
 package ca.mcgill.cs.comp303.rummy.bots;
 
-import java.util.ArrayList;
-import java.util.Observable;
 import java.util.Random;
-import java.util.Set;
 
 import ca.mcgill.cs.comp303.rummy.model.Card;
 import ca.mcgill.cs.comp303.rummy.model.Hand;
@@ -23,31 +20,32 @@ public class RandomBot implements RummyBot
 	 */
 	public RandomBot(Hand pHand)
 	{
-		aHand = pHand;
+		this.aHand = pHand;
 	}
 
 	@Override
 	public boolean drawFromDeck()
 	{
-		return aRandom.nextBoolean();
+		return this.aRandom.nextBoolean();
 	}
 
 	@Override
 	public Card discard()
 	{
-		Card[] unmatched = (Card[]) aHand.getUnmatchedCards().toArray();
+		Card[] unmatched = (Card[]) this.aHand.getUnmatchedCards().toArray();
 		if(unmatched.length == 0)
 		{
-			return unmatched[aRandom.nextInt() % unmatched.length];
+			return unmatched[this.aRandom.nextInt() % unmatched.length];
 		}
 		
-		return aHand.getCards().get(aRandom.nextInt() % aHand.size());
+		int randomIndex = this.aRandom.nextInt() % this.aHand.size();
+		return this.aHand.getCards().get(randomIndex);
 	}
 
 	@Override
 	public boolean knock()
 	{
-		if(aHand.score() <= 10) 
+		if(this.aHand.score() <= 10) 
 		{
 			return true;
 		}
