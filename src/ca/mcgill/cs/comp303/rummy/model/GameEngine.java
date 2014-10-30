@@ -20,9 +20,8 @@ import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
 public final class GameEngine extends Observable implements Serializable
 {
 	private static final long serialVersionUID = 3306656900603120034L;
-	private static GameEngine aGameInstance = new GameEngine();
-	private static ArrayList<ILoggerObserver> aObservers;
-	
+	private static final int KNOCK_SCORE = 10;
+
 	/**
 	 * Represents the state of the game.  
 	 */
@@ -121,33 +120,28 @@ public final class GameEngine extends Observable implements Serializable
 	/**
 	 * Takes a card from the deck and adds it to the specified players hand.
 	 * @param pPlayer the player to get the drawn card
-	 * @throws CannotDrawException when there are less than two cards in the deck
+	 * @pre GamePhase == GamePhase.DRAW
 	 */
-	public void drawFromDeck(Player pPlayer) throws CannotDrawException
+	public void drawFromDeck(Player pPlayer)
 	{
-		Card tmp;
-		
-		if(aDeck.size() < 2)
-		{
-			throw new CannotDrawException("Cannot draw from deck: less than 2 cards left in deck.");
-		}
 		try
 		{
-			tmp = aDeck.draw();
-			pPlayer.addCard(tmp);
+			pPlayer.addCard(aDeck.draw());
 		}
 		catch (CannotPerformActionException e)
 		{
 			String message = new String(pPlayer.getName() + " cannot draw from the deck: added duplicate card to hand");
 			logEvent(Level.SEVERE, message);
-			throw new CannotDrawException(message);
 		}
 		
-		// Next phase is discard
+		if(aDeck.size() == 2)
+		{
+			aPhase = GamePhase.ENDGAME;
+		}
 		aPhase = GamePhase.DISCARD;
 		
 		//update loggers
-		String aMessage = "Player: " + pPlayer.getName() + " draws from the deck " + tmp.toString();
+		String aMessage = "Player: " + pPlayer.getName() + " draws from the deck.";
 		logEvent(Level.INFO, aMessage);	
 	}
 	
@@ -155,6 +149,7 @@ public final class GameEngine extends Observable implements Serializable
 	 * Takes a card from the discard pile and adds it to the specified players hand.
 	 * @param pPlayer the player to get the drawn card	 
 	 * @throws CannotDrawException when the discard pile is empty
+	 * @pre aPhase == GamePhase.DRAW
 	 */
 	public void drawFromDiscardPile(Player pPlayer) throws CannotDrawException
 	{
