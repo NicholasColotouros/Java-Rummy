@@ -53,39 +53,17 @@ public class M2Driver
 	{
 		if(pBot.drawFromDeck())
 		{
-			try
-			{
-				aGame.drawFromDeck(pPlayer);
-			}
-			catch (CannotDrawException e)
-			{
-				try
-				{
-					aGame.drawFromDiscardPile(pPlayer);
-				}
-				catch (CannotDrawException e1)
-				{
-					return true;
-				}
-			}
+			aGame.drawFromDeck(pPlayer);
 		}
 		else
 		{
 			try
 			{
-				aGame.drawFromDeck(pPlayer);
+				aGame.drawFromDiscardPile(pPlayer);
 			}
 			catch (CannotDrawException e)
 			{
-				try
-				{
-					aGame.drawFromDeck(pPlayer);
-				}
-				catch (CannotDrawException e1)
-				{
-					return true;
-				}
-				
+				aGame.drawFromDeck(pPlayer);
 			}
 		}
 		

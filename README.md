@@ -31,6 +31,7 @@ The rules that will be used for this implementation of the game can be found [he
 2. ~~Design the Driver (will likely go hand in hand with the above)~~
 3. Decide on Exceptions vs return types for performing actions that shouldn't be possible to do (ie drawing from an empty discard pile).
 4. ~~Implement the loggers.~~
+   4a. Refactor loggers and replace log statements with bundle.
 5. Implement and test functionality
 6. Take care of any tasks labelled TODO in eclipse (to see them, look at the menu bar in eclipse. Click Window -> show view -> tasks).
 

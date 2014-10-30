@@ -340,8 +340,6 @@ public final class GameEngine extends Observable implements Serializable
 		}
 		
 		logEvent(Level.INFO, "Game successfully loaded from: " + pPath);
-
-		// TODO: update the rest and get things going from where things were left off
 	}
 	
 	/**
