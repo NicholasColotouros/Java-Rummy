@@ -65,7 +65,7 @@ public final class GameEngine extends Observable implements Serializable
 			aPlayer2.discardHand();
 		}
 		
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < Hand.HAND_SIZE; i++)
 		{
 			try
 			{
@@ -188,7 +188,7 @@ public final class GameEngine extends Observable implements Serializable
 	 */
 	public void knock(Player pPlayer) throws CannotKnockException
 	{
-		if(pPlayer.getHand().score() >= 10)
+		if(pPlayer.getHand().score() >= KNOCK_SCORE)
 		{
 			throw new CannotKnockException("Player " + pPlayer.getName() + " cannot knock. Too much deadwood");
 		}
