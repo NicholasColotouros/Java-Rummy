@@ -22,6 +22,9 @@ public final class GameEngine extends Observable implements Serializable
 	private static final long serialVersionUID = 3306656900603120034L;
 	private static final int KNOCK_SCORE = 10;
 
+	private static GameEngine aGameInstance = new GameEngine();
+	private static ArrayList<ILoggerObserver> aObservers;
+	
 	/**
 	 * Represents the state of the game.  
 	 */
