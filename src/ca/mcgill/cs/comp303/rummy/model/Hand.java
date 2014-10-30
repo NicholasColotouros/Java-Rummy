@@ -39,22 +39,11 @@ public class Hand implements Serializable
 	 * Adds pCard to the list of unmatched cards.
 	 * If the card is already in the hand, it is not added.
 	 * @param pCard The card to add.
-	 * @throws HandException if the hand is complete.
-	 * @throws HandException if the card is already in the hand.
 	 * @pre pCard != null
 	 */
-	public void add( Card pCard ) throws HandException
+	public void add( Card pCard )
 	{
-		if (this.isComplete()) 
-		{ 
-			throw new HandException("The hand is complete.");
-		}
-		if (this.aCards.contains(pCard)) 
-		{
-			throw new HandException("The card is already in the hand.");
-		}
-		this.aUnmatched.add(pCard);
-		return;
+		aUnmatched.add(pCard);
 	}
 	
 	/**
@@ -175,72 +164,6 @@ public class Hand implements Serializable
 		return score; 
 	}
 	
-	/**
-	 * Creates a group of cards of the same rank.
-	 * @param pCards The cards to groups
-	 * @pre pCards != null
-	 * @throws HandException If the cards in pCard are not all unmatched
-	 * cards of the hand or if the group is not a valid group.
-	 */
-	public void createGroup( Set<Card> pCards )
-	{
-		// Make sure all the cards are unmatched.
-		for (Card card : pCards) 
-		{
-			if (!aUnmatched.contains(card)) 
-			{
-				throw new HandException("The cards are not all unmatched.");
-			}
-		}
-		// Make sure the group is valid.
-		CardSet group = new CardSet(pCards);
-		if (group.isGroup())
-		{
-			aGroups.add(group);
-			// Remove cards from being unmatched.
-			for (Card card : pCards)
-			{
-				aUnmatched.remove(card);
-			}
-		}
-		else 
-		{
-			throw new HandException("Not a valid group.");
-		}
-	}
-	
-	/**
-	 * Creates a run of cards of the same suit.
-	 * @param pCards The cards to group in a run
-	 * @pre pCards != null
-	 * @throws HandException If the cards in pCards are not all unmatched
-	 * cards of the hand or if the run is not a valid run.
-	 */
-	public void createRun( Set<Card> pCards ) throws HandException
-	{	
-		// Make sure all the cards are unmatched
-		for (Card card : pCards) 
-		{
-			if (!aUnmatched.contains(card))
-			{
-				throw new HandException("The cards are not all unmatched!");
-			}
-		}
-		CardSet run = new CardSet(pCards);
-		if (run.isRun())
-		{
-			aRuns.add(run);
-			//Remove from unmatched cards
-			for (Card card : pCards)
-			{
-				aUnmatched.remove(card);
-			}
-		}
-		else 
-		{
-			throw new HandException("This is not a valid run!");
-		}
-	}
 	
 	/**
 	 * Calculates the matching of cards into groups and runs that
