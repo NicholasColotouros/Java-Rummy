@@ -29,7 +29,7 @@ The rules that will be used for this implementation of the game can be found [he
 ###MILESTONE 2:
 1. ~~Define the RummyBot interface~~
 2. ~~Design the Driver (will likely go hand in hand with the above)~~
-3. Decide on Exceptions vs return types for performing actions that shouldn't be possible to do (ie drawing from an empty discard pile).
+3. ~~Decide on Exceptions vs return types for performing actions that shouldn't be possible to do (ie drawing from an empty discard pile).~~
 4. ~~Implement the loggers.~~
    4a. Refactor loggers and replace log statements with bundle.
 5. Implement and test functionality

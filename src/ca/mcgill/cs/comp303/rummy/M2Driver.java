@@ -4,7 +4,9 @@ import ca.mcgill.cs.comp303.rummy.bots.RandomBot;
 import ca.mcgill.cs.comp303.rummy.bots.RummyBot;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotDiscardException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotDrawException;
+import ca.mcgill.cs.comp303.rummy.exceptions.CannotKnockException;
 import ca.mcgill.cs.comp303.rummy.model.GameEngine;
+import ca.mcgill.cs.comp303.rummy.model.GameEngine.GamePhase;
 import ca.mcgill.cs.comp303.rummy.model.Player;
 
 /**
@@ -31,16 +33,38 @@ public class M2Driver
 			RummyBot bot2 = new RandomBot(aGame.getPlayer2().getHand());
 
 			
-			while(aGame.getDeckSize() > 2)
+			while(true)
 			{
 				// Player 1 turn, break if knocked or game over
 				if(playTurn(bot1, aGame.getPlayer1()))
 				{
-					break;
+					try
+					{
+						aGame.knock(aGame.getPlayer1());
+						break;
+					}
+					catch (CannotKnockException e)
+					{
+						// do nothing, proceed with the game because we can't knock
+					}
 				}
 				
 				// Player 2 turn
 				else if(playTurn(bot2, aGame.getPlayer2()))
+				{
+					try
+					{
+						aGame.knock(aGame.getPlayer2());
+						break;
+					}
+					catch (CannotKnockException e)
+					{
+						// do nothing, proceed with the game because we can't knock
+					}
+				}
+				
+				// Deck has less than two cards
+				if(aGame.getPhase() == GamePhase.ENDGAME)
 				{
 					break;
 				}

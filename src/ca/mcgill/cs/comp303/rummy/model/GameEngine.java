@@ -28,7 +28,7 @@ public final class GameEngine extends Observable implements Serializable
 	/**
 	 * Represents the state of the game.  
 	 */
-	private enum GamePhase
+	public enum GamePhase
 	{
 		FIRSTDRAW, DRAW, DISCARD, ENDGAME
 	};
@@ -194,23 +194,22 @@ public final class GameEngine extends Observable implements Serializable
 	 * Simulates knocking, which is done AFTER discarding a card.
 	 * @param pPlayer the player that knocked.
 	 * @throws CannotKnockException if the player who knocked has >= 10 points of deadwood 
-	 * @pre aPhase == GamePhase.ENDGAME
 	 */
 	public void knock(Player pPlayer) throws CannotKnockException
 	{
-		assert aPhase == GamePhase.ENDGAME;
-		
 		if(pPlayer.getHand().score() >= KNOCK_SCORE)
 		{
 			throw new CannotKnockException("Player " + pPlayer.getName() + " cannot knock. Too much deadwood");
 		}
-		
-		int p1Score = 0;
-		int p2Score = 0;
+		aPhase = GamePhase.ENDGAME;
+
 		// TODO: Run the new version of automatch, which calculates the optimal scores for both players
 		// then based on who has the better score, update the players score appropriately
+
 		
-		aPhase = GamePhase.ENDGAME;
+		// TODO: log the scores
+		int p1Score = 0;
+		int p2Score = 0;
 		
 		//update loggers
 		String message = "Player "+ pPlayer + " knocks.\n";
