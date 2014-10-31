@@ -39,12 +39,20 @@ public class Player implements Serializable
 		{
 			throw new CannotPerformActionException("Cannot add a card already in the hand.");
 		}
-		if(pCard == null) 
+		
+		// Last hand in dealing
+		if(pCard == null)
 		{
-			throw new CannotPerformActionException("Cannot add null card to player hand.");
+			aLastCardDrawn = null;
 		}
+		
+		else
+		{
+			aLastCardDrawn = pCard;
+		}
+		
 		aHand.add(pCard);
-		aLastCardDrawn = pCard;
+		aHand.autoMatch();
 	}
 	
 	/**
@@ -62,6 +70,7 @@ public class Player implements Serializable
 		if(aHand.contains(pCard))
 		{
 			aHand.remove(pCard);
+			aHand.autoMatch();
 			return true;
 		}
 		return false;

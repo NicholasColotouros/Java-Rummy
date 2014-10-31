@@ -51,7 +51,6 @@ public class TestSerializer
 		try
 		{
 			GameEngine loadedEngine = saver.load(aBinaryPath);
-			// TODO: compare the engines
 		}
 		catch (LoadException e)
 		{
