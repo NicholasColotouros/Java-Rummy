@@ -103,9 +103,12 @@ public final class GameEngine extends Observable implements Serializable
 	 * @param pPlayer The player to discard the card.
 	 * @param pCard The card to be discarded.
 	 * @throws CannotPerformActionException if the card discarded is the card that was previously drawn.
+	 * @pre aPhase == GamePhase.DISCARD
 	 */
 	public void discard(Player pPlayer, Card pCard) throws CannotPerformActionException
 	{
+		assert aPhase == GamePhase.DISCARD;
+		
 		if(pPlayer.discard(pCard)) 
 		{
 			aDiscardPile.push(pCard);
@@ -123,10 +126,12 @@ public final class GameEngine extends Observable implements Serializable
 	/**
 	 * Takes a card from the deck and adds it to the specified players hand.
 	 * @param pPlayer the player to get the drawn card
-	 * @pre GamePhase == GamePhase.DRAW
+	 * @pre aPhase == GamePhase.DRAW
 	 */
 	public void drawFromDeck(Player pPlayer)
 	{
+		assert aPhase == GamePhase.DRAW;
+		
 		try
 		{
 			pPlayer.addCard(aDeck.draw());
@@ -156,6 +161,7 @@ public final class GameEngine extends Observable implements Serializable
 	 */
 	public void drawFromDiscardPile(Player pPlayer) throws CannotDrawException
 	{
+		assert aPhase == GamePhase.DRAW;
 		Card tmp;
 		
 		if(aDiscardPile.isEmpty()) 
@@ -188,9 +194,12 @@ public final class GameEngine extends Observable implements Serializable
 	 * Simulates knocking, which is done AFTER discarding a card.
 	 * @param pPlayer the player that knocked.
 	 * @throws CannotKnockException if the player who knocked has >= 10 points of deadwood 
+	 * @pre aPhase == GamePhase.ENDGAME
 	 */
 	public void knock(Player pPlayer) throws CannotKnockException
 	{
+		assert aPhase == GamePhase.ENDGAME;
+		
 		if(pPlayer.getHand().score() >= KNOCK_SCORE)
 		{
 			throw new CannotKnockException("Player " + pPlayer.getName() + " cannot knock. Too much deadwood");
