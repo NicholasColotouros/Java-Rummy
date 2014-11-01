@@ -1,7 +1,6 @@
 package ca.mcgill.cs.comp303.rummy.logging;
 
 import java.io.File;
-//import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;

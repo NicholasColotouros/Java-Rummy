@@ -3,6 +3,7 @@ package ca.mcgill.cs.comp303.rummy.model;
 import java.io.Serializable;
 //import java.util.logging.*;
 import java.util.Observable;
+import java.util.Set;
 import java.util.Stack;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -13,6 +14,7 @@ import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 import ca.mcgill.cs.comp303.rummy.exceptions.LoadException;
 import ca.mcgill.cs.comp303.rummy.exceptions.SaveException;
 import ca.mcgill.cs.comp303.rummy.logging.ILoggerObserver;
+import ca.mcgill.cs.comp303.rummy.model.Card.Rank;
 import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
 
 /**
@@ -215,43 +217,78 @@ public final class GameEngine extends Observable implements Serializable
 		}
 		aPhase = GamePhase.ENDGAME;
 
-		// TODO: Run the new version of automatch, which calculates the optimal scores for both players
-		// then based on who has the better score, update the players score appropriately
-
 		
-		// TODO: log the scores
-		int p1Score = 0;
-		int p2Score = 0;
-		
-		//update loggers
-//		String message = "Player "+ pPlayer + " knocks.\n";
-//		String messsge2 = aPlayer1.getName() + " has a score of " + aPlayer1.getHand().score() + "\n";
-//		String message3 = aPlayer2.getName() + " has a score of " + aPlayer2.getHand().score() + "\n";
-//		logEvent(Level.INFO, message);	
-//		logEvent(Level.INFO, messsge2);
-//		logEvent(Level.INFO, message3);
-		
-		// determine winner, set the dealer for the new round, update the scores
-		int scoreDifference = Math.abs(p1Score - p2Score);
-		if(p1Score > p2Score)
+		// Find out who the other player is
+		Player otherPlayer;
+		if(pPlayer.equals(aPlayer1))
 		{
-			aPlayer1.incrementScore(scoreDifference);
-			aP1IsDealer = true;
-			
-			logKnock(Level.INFO, pPlayer, aPlayer1, aPlayer2, scoreDifference, false);
+			otherPlayer = aPlayer2;
 		}
-		else if(p1Score < p2Score)
-		{
-			aPlayer2.incrementScore(scoreDifference);
-			aP1IsDealer = false;
-			
-			logKnock(Level.INFO, pPlayer, aPlayer2, aPlayer1, scoreDifference, false);
-		}
-		
 		else
 		{
-			logKnock(Level.INFO, pPlayer, aPlayer1, aPlayer2, scoreDifference, true);
+			otherPlayer = aPlayer1;
 		}
+		int otherScore = lastRoundMatching(pPlayer, otherPlayer);
+
+		// if the other player won
+		if(otherScore > pPlayer.getHand().score())
+		{
+			otherPlayer.incrementScore(otherScore - pPlayer.getHand().score());
+			// TODO: log the undercut
+		}
+		
+		// if pPlayer won (the one who knocked
+		else if(otherScore < pPlayer.getHand().score())
+		{
+			pPlayer.incrementScore(pPlayer.getHand().score() - otherScore);
+			// TODO: log that pPlayer won
+		}
+		
+		// round result: draw
+		else
+		{
+			// TODO: log the draw
+		}
+	}
+	
+	private static int lastRoundMatching(Player pKnocker, Player pOtherPlayer)
+	{
+		int otherScore = pOtherPlayer.getHand().score();
+		
+		// TODO: implement proper matching method, this one only lays off unmatched cards
+		
+		// get the unmatched cards as an array so cards can be removed without affecting the hand
+		Card[] unmatchedArray = (Card[]) pOtherPlayer.getHand().getUnmatchedCards().toArray();
+		Set<ICardSet> matched = pKnocker.getHand().getMatchedSets();
+		
+		// TODO: match the runs first
+		
+		// Now match the groups
+		for(ICardSet set : matched)
+		{
+			// if the set is a group, add all cards that fit in that group
+			if(set.isGroup())
+			{
+				// Get the rank of the set
+				Rank groupRank = null;
+				
+				for(int i = 0; i < unmatchedArray.length; i++)
+				{
+					if(unmatchedArray[i] != null)
+					{
+						if(unmatchedArray[i].getRank() == groupRank)
+						{
+							// Deduct the score of the previously unmatched card, as it is no longer matched
+							otherScore -= unmatchedArray[i].getRank().ordinal() + 1;
+							unmatchedArray[i] = null;
+						}
+					}
+				}
+			}
+		}
+		
+		
+		return otherScore;
 	}
 	
 	/**
