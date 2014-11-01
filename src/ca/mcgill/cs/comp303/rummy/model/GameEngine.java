@@ -1,6 +1,7 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
 import java.io.Serializable;
+//import java.util.logging.*;
 import java.util.Observable;
 import java.util.Stack;
 import java.util.ArrayList;
@@ -24,6 +25,16 @@ public final class GameEngine extends Observable implements Serializable
 
 	private static GameEngine aGameInstance = new GameEngine();
 	private static ArrayList<ILoggerObserver> aObservers;
+	
+	/**
+	 * 
+	 * Represents the different event that might occur.
+	 *
+	 */
+	public enum Event
+	{
+		RESET, DRAWFROMDECK, DRAWFROMDISCARDPILE, DISCARD
+	};
 	
 	/**
 	 * Represents the state of the game.  
@@ -77,11 +88,11 @@ public final class GameEngine extends Observable implements Serializable
 			}
 			catch (CannotPerformActionException e)
 			{
-				logEvent(Level.SEVERE, "Draw failed during reset.");
+			//	logEvent(Level.SEVERE, "Draw failed during reset.");
 			}
 		}
 		aPhase = GamePhase.FIRSTDRAW;
-		logEvent(Level.INFO, "Starting new round.");	
+		logEvent(Level.INFO, Event.RESET, null, null);	
 	}
 	
 	/**
@@ -95,7 +106,7 @@ public final class GameEngine extends Observable implements Serializable
 		aPlayer2 = new Player(pP2Name);
 		reset();
 		
-		logEvent(Level.INFO, "Starting new game.");			
+	//	logEvent(Level.INFO, "Starting new game.");			
 	}
 	
 	/**
@@ -118,8 +129,8 @@ public final class GameEngine extends Observable implements Serializable
 		aPhase = GamePhase.DRAW;
 		
 		//update loggers
-		String aMessage = "Player " + pPlayer.toString() + "discards" + pCard.toString();
-		logEvent(Level.INFO, aMessage);	
+		logEvent(Level.INFO, Event.DISCARD, pPlayer, pCard);	
+
 		
 	}
 	
@@ -138,8 +149,8 @@ public final class GameEngine extends Observable implements Serializable
 		}
 		catch (CannotPerformActionException e)
 		{
-			String message = new String(pPlayer.getName() + " cannot draw from the deck: added duplicate card to hand");
-			logEvent(Level.SEVERE, message);
+		//	String message = new String(pPlayer.getName() + " cannot draw from the deck: added duplicate card to hand");
+//			logEvent(Level.SEVERE, message);
 		}
 		
 		if(aDeck.size() == 2)
@@ -149,8 +160,8 @@ public final class GameEngine extends Observable implements Serializable
 		aPhase = GamePhase.DISCARD;
 		
 		//update loggers
-		String aMessage = "Player: " + pPlayer.getName() + " draws from the deck.";
-		logEvent(Level.INFO, aMessage);	
+		logEvent(Level.INFO, Event.DRAWFROMDECK, pPlayer, null);	
+
 	}
 	
 	/**
@@ -167,7 +178,7 @@ public final class GameEngine extends Observable implements Serializable
 		if(aDiscardPile.isEmpty()) 
 		{
 			String message = new String("Cannot draw from discard pile: no cards to draw.");
-			logEvent(Level.SEVERE, message);
+	//		logEvent(Level.SEVERE, message);
 			throw new CannotDrawException(message);
 		}
 		try
@@ -178,7 +189,7 @@ public final class GameEngine extends Observable implements Serializable
 		catch (CannotPerformActionException e)
 		{
 			String message = new String("Cannot draw from deck: Added duplicate card to hand.");
-			logEvent(Level.SEVERE, message);
+	//		logEvent(Level.SEVERE, message);
 			throw new CannotDrawException(message);
 		}
 
@@ -186,8 +197,9 @@ public final class GameEngine extends Observable implements Serializable
 		aPhase = GamePhase.DISCARD;
 		
 		//update loggers
-		String aMessage = "Player " + pPlayer.toString() + " draws from discrad pile " + tmp.toString();
-		logEvent(Level.INFO, aMessage);	
+		
+		logEvent(Level.INFO, Event.DRAWFROMDISCARDPILE, pPlayer, tmp);	
+
 	}
 	
 	/**
@@ -212,12 +224,12 @@ public final class GameEngine extends Observable implements Serializable
 		int p2Score = 0;
 		
 		//update loggers
-		String message = "Player "+ pPlayer + " knocks.\n";
-		String messsge2 = aPlayer1.getName() + " has a score of " + aPlayer1.getHand().score() + "\n";
-		String message3 = aPlayer2.getName() + " has a score of " + aPlayer2.getHand().score() + "\n";
-		logEvent(Level.INFO, message);	
-		logEvent(Level.INFO, messsge2);
-		logEvent(Level.INFO, message3);
+//		String message = "Player "+ pPlayer + " knocks.\n";
+//		String messsge2 = aPlayer1.getName() + " has a score of " + aPlayer1.getHand().score() + "\n";
+//		String message3 = aPlayer2.getName() + " has a score of " + aPlayer2.getHand().score() + "\n";
+//		logEvent(Level.INFO, message);	
+//		logEvent(Level.INFO, messsge2);
+//		logEvent(Level.INFO, message3);
 		
 		// determine winner, set the dealer for the new round, update the scores
 		int scoreDifference = Math.abs(p1Score - p2Score);
@@ -226,19 +238,19 @@ public final class GameEngine extends Observable implements Serializable
 			aPlayer1.incrementScore(scoreDifference);
 			aP1IsDealer = true;
 			
-			logEvent(Level.INFO, "Player: " + aPlayer1.getName() + " wins and gains " + scoreDifference + " points.");
+			logKnock(Level.INFO, pPlayer, aPlayer1, aPlayer2, scoreDifference, false);
 		}
 		else if(p1Score < p2Score)
 		{
 			aPlayer2.incrementScore(scoreDifference);
 			aP1IsDealer = false;
 			
-			logEvent(Level.INFO, "Player: " + aPlayer2.getName() + " wins and gains " + scoreDifference + " points.");			
+			logKnock(Level.INFO, pPlayer, aPlayer2, aPlayer1, scoreDifference, false);
 		}
 		
 		else
 		{
-			logEvent(Level.INFO, "Game tied.");
+			logKnock(Level.INFO, pPlayer, aPlayer1, aPlayer2, scoreDifference, true);
 		}
 	}
 	
@@ -322,11 +334,11 @@ public final class GameEngine extends Observable implements Serializable
 		}
 		catch(SaveException e)
 		{
-			logEvent(Level.SEVERE, "An error occurred while saving: " + e.getLocalizedMessage());
+		//	logEvent(Level.SEVERE, "An error occurred while saving: " + e.getLocalizedMessage());
 			throw e;
 		}
 		
-		logEvent(Level.INFO, "Game successfully saved to: " + pPath);
+	//	logEvent(Level.INFO, "Game successfully saved to: " + pPath);
 	}
 	
 	/**
@@ -343,11 +355,11 @@ public final class GameEngine extends Observable implements Serializable
 		}
 		catch(LoadException e)
 		{
-			logEvent(Level.SEVERE, "An error occurred while loading: " + e.getLocalizedMessage());
+	//		logEvent(Level.SEVERE, "An error occurred while loading: " + e.getLocalizedMessage());
 			throw e;
 		}
 		
-		logEvent(Level.INFO, "Game successfully loaded from: " + pPath);
+	//	logEvent(Level.INFO, "Game successfully loaded from: " + pPath);
 	}
 	
 	/**
@@ -357,11 +369,20 @@ public final class GameEngine extends Observable implements Serializable
 	 * @param pMessage the message
 	 * 
 	 */
-	private static void logEvent(Level pPriority, String pMessage)
+	private static void logEvent(Level pPriority, Event pEvent, Player pPlayer, Card pCard)
+	{
+		
+		for(ILoggerObserver o: aObservers)
+		{
+			o.logEvent(pPriority, pEvent, pPlayer, pCard);
+		}
+	}
+	
+	private static void logKnock(Level pPriority, Player pKnocker, Player pPlayer1, Player pPlayer2, int pScoreDifference, boolean pIsTied)
 	{
 		for(ILoggerObserver o: aObservers)
 		{
-			o.logEvent(pPriority, pMessage);
+			o.logKnock(pPriority, pKnocker, pPlayer1, pPlayer2, pScoreDifference, pIsTied);
 		}
 	}
 }
