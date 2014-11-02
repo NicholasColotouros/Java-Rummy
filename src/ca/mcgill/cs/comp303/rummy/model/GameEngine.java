@@ -228,29 +228,53 @@ public final class GameEngine extends Observable implements Serializable
 		{
 			otherPlayer = aPlayer1;
 		}
+		
 		int otherScore = lastRoundMatching(pPlayer, otherPlayer);
+		int knockerScore = pPlayer.getHand().score();
 
-		// if the other player won
-		if(otherScore > pPlayer.getHand().score())
+		// If gin => round over
+		if(knockerScore == 0)
 		{
-			otherPlayer.incrementScore(otherScore - pPlayer.getHand().score());
-			// TODO: log the undercut
+			logWin(pPlayer, otherPlayer.getHand().score(), true);
+		}
+
+		
+		// if pPlayer won (the one who knocked)
+		else if(otherScore < knockerScore)
+		{
+			logWin(pPlayer, knockerScore - otherScore, false);
 		}
 		
-		// if pPlayer won (the one who knocked
-		else if(otherScore < pPlayer.getHand().score())
-		{
-			pPlayer.incrementScore(pPlayer.getHand().score() - otherScore);
-			// TODO: log that pPlayer won
-		}
-		
-		// round result: draw
+		// if the other player won or draw
 		else
 		{
-			// TODO: log the draw
+			logWin(otherPlayer, otherScore - knockerScore, false);
 		}
+
 	}
 	
+	/**
+	 * Updates the score for the winner and notifies the loggers.
+	 * @param pWinner The winner of the round.
+	 * @param pPointsGained The amount of points the winner gained
+	 * @param pHasGin True if the winner has gin.
+	 * @pre pPointsGained >= 0
+	 */
+	private void logWin(Player pWinner, int pPointsGained, boolean pHasGin)
+	{
+		assert pPointsGained >= 0;
+		
+		pWinner.incrementScore(pPointsGained);
+		logKnock(Level.INFO, pWinner, aPlayer1, aPlayer2, pPointsGained, pHasGin);
+	}
+	
+	/**
+	 * Lays off the cards for the player who did not knock and calculates the new score.
+	 * 
+	 * @param pKnocker The player who knocked.
+	 * @param pOtherPlayer The player that did NOT knock.
+	 * @return The score of the player who did not knock after laying off cards.
+	 */
 	private static int lastRoundMatching(Player pKnocker, Player pOtherPlayer)
 	{
 		int otherScore = pOtherPlayer.getHand().score();
@@ -286,8 +310,6 @@ public final class GameEngine extends Observable implements Serializable
 				}
 			}
 		}
-		
-		
 		return otherScore;
 	}
 	
@@ -415,11 +437,11 @@ public final class GameEngine extends Observable implements Serializable
 		}
 	}
 	
-	private static void logKnock(Level pPriority, Player pKnocker, Player pPlayer1, Player pPlayer2, int pScoreDifference, boolean pIsTied)
+	private static void logKnock(Level pPriority, Player pKnocker, Player pPlayer1, Player pPlayer2, int pScoreDifference, boolean pHasGin)
 	{
 		for(ILoggerObserver o: aObservers)
 		{
-			o.logKnock(pPriority, pKnocker, pPlayer1, pPlayer2, pScoreDifference, pIsTied);
+			o.logKnock(pPriority, pKnocker, pPlayer1, pPlayer2, pScoreDifference, pHasGin);
 		}
 	}
 }
