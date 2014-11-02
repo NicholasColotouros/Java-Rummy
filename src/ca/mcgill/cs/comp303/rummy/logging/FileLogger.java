@@ -86,15 +86,16 @@ public class FileLogger implements ILoggerObserver
 	}
 	
 	@Override
-	public void logKnock(Level pPriority, Player pKnocker, Player pPlayer1, Player pPlayer2, int pScoreDifference, boolean pIsTied)
+	public void logKnock(Level pPriority, Player pKnocker, Player pPlayer1, Player pPlayer2, int pScoreDifference, boolean pHasGin)
 	{
+		// TODO: change logging to reflect the new passed boolean.
 		String message = "Player "+ pKnocker.getName() + " knocks.\n";
 		String messsge2 = pPlayer1.getName() + " has a score of " + pPlayer1.getHand().score() + "\n";
 		String message3 = pPlayer2.getName() + " has a score of " + pPlayer2.getHand().score() + "\n";
 		aLogger.log(Level.INFO, message);	
 		aLogger.log(Level.INFO, messsge2);
 		aLogger.log(Level.INFO, message3);
-		if (!pIsTied)
+		if (!pHasGin)
 		{
 			aLogger.log(Level.INFO, "Player: " + pPlayer1.getName() + " wins and gains " + pScoreDifference + " points.");
 		}

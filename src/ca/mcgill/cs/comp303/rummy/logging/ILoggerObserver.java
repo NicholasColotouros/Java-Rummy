@@ -33,8 +33,8 @@ public interface ILoggerObserver
 	 * @param pPlayer1 the player who wins after the knock
 	 * @param pPlayer2 the player who loses after the knock
 	 * @param pScoreDifference the score difference between players after the knock
-	 * @param pIsTied return True if it is a tie after knock
+	 * @param pHasGin return True if the winner won via gin
 	 */
-	void logKnock(Level pPriority, Player pKnocker, Player pPlayer1, Player pPlayer2, int pScoreDifference, boolean pIsTied);
+	void logKnock(Level pPriority, Player pKnocker, Player pPlayer1, Player pPlayer2, int pScoreDifference, boolean pHasGin);
 
 }
