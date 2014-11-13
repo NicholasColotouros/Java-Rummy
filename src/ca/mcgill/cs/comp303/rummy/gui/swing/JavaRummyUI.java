@@ -78,7 +78,6 @@ public class JavaRummyUI extends JFrame
 	
 	public static void main(String[] pArgs)
 	{
-		// TODO: fix bug -> process does not end upon window closing
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() 
