@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -93,6 +94,17 @@ public class JavaRummyUI extends JFrame
 			public void actionPerformed(ActionEvent pEvent)
 			{
 				System.exit(0);
+			}
+		});
+		
+		
+		// helpmenu actionListeners
+		aboutMenuItem.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				JOptionPane.showMessageDialog(null, STRINGS.getString("aboutMessage"));
 			}
 		});
 		
