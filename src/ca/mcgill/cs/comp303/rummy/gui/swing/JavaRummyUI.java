@@ -1,5 +1,7 @@
 package ca.mcgill.cs.comp303.rummy.gui.swing;
 
+import ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel.HandPanel;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -36,10 +38,13 @@ public class JavaRummyUI extends JFrame
 	public JavaRummyUI()
 	{
 		super(TITLE);
-		setLayout(new BorderLayout());
-		setJMenuBar(createMenuBar());
-		setSize(DEFAULT_SIZE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(DEFAULT_SIZE);
+		
+		setJMenuBar(createMenuBar());
+		setLayout(new BorderLayout());
+
+		add(new HandPanel(), BorderLayout.NORTH);
 	}
 	
 	private JMenuBar createMenuBar()
@@ -102,7 +107,7 @@ public class JavaRummyUI extends JFrame
 		aboutMenuItem.addActionListener(new ActionListener()
 		{
 			@Override
-			public void actionPerformed(ActionEvent arg0)
+			public void actionPerformed(ActionEvent pEvent)
 			{
 				JOptionPane.showMessageDialog(null, STRINGS.getString("aboutMessage"));
 			}
