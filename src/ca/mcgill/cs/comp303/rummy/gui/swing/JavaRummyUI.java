@@ -1,0 +1,80 @@
+package ca.mcgill.cs.comp303.rummy.gui.swing;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
+
+/**
+ * 
+ * @author Nathan
+ *
+ */
+@SuppressWarnings("serial")
+public class JavaRummyUI extends JFrame
+{
+	public static final String RESOURCE_BUNDLE_NAME = "JavaRummyUIBundle";
+	public static final Locale LOCALE = Locale.CANADA;
+	public static final ResourceBundle STRINGS = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, LOCALE);
+	
+	public static final String TITLE = STRINGS.getString("title");
+	
+	public static final Dimension DEFAULT_SIZE = new Dimension(800, 600);
+	
+	/**
+	 * Default constructor.
+	 */
+	public JavaRummyUI()
+	{
+		super(TITLE);
+		setLayout(new BorderLayout());
+		setJMenuBar(createMenuBar());
+		setSize(DEFAULT_SIZE);
+	}
+	
+	private JMenuBar createMenuBar()
+	{
+		JMenuBar menuBar = new JMenuBar();
+		
+		JMenu fileMenu = new JMenu(STRINGS.getString("file"));
+		JMenu helpMenu = new JMenu(STRINGS.getString("help"));
+		
+		JMenuItem saveMenuItem = new JMenuItem(STRINGS.getString("save"));
+		JMenuItem loadMenuItem = new JMenuItem(STRINGS.getString("load"));
+		JMenuItem exitMenuItem = new JMenuItem(STRINGS.getString("exit"));
+		fileMenu.add(saveMenuItem);
+		fileMenu.add(loadMenuItem);
+		fileMenu.addSeparator();
+		fileMenu.add(exitMenuItem);
+		
+		JMenuItem aboutMenuItem = new JMenuItem(STRINGS.getString("about"));
+		helpMenu.add(aboutMenuItem);
+		
+		// TODO: add action listeners
+		
+		menuBar.add(fileMenu);
+		menuBar.add(helpMenu);
+		
+		
+		return menuBar;
+	}
+	
+	public static void main(String[] pArgs)
+	{
+		// TODO: fix bug -> process does not end upon window closing
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() 
+			{
+				JavaRummyUI mainFrame = new JavaRummyUI();
+				mainFrame.setVisible(true);
+			}
+		});
+	}
+}
