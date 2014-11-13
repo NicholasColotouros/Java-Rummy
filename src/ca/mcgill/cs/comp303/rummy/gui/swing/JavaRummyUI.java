@@ -36,10 +36,12 @@ public class JavaRummyUI extends JFrame
 		setLayout(new BorderLayout());
 		setJMenuBar(createMenuBar());
 		setSize(DEFAULT_SIZE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	private JMenuBar createMenuBar()
 	{
+		// construct the structure of the menu bar
 		JMenuBar menuBar = new JMenuBar();
 		
 		JMenu fileMenu = new JMenu(STRINGS.getString("file"));
@@ -56,11 +58,20 @@ public class JavaRummyUI extends JFrame
 		JMenuItem aboutMenuItem = new JMenuItem(STRINGS.getString("about"));
 		helpMenu.add(aboutMenuItem);
 		
-		// TODO: add action listeners
-		
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
 		
+		// Action listeners
+		
+		// Action listeners for the fileMenu
+		saveMenuItem.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent pEvent)
+			{
+				
+			}
+		});
 		
 		return menuBar;
 	}
