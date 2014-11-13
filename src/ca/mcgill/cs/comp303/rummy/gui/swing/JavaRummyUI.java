@@ -71,7 +71,28 @@ public class JavaRummyUI extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent pEvent)
 			{
-				
+				// TODO: pop up an explorer window
+				// TODO: call save at that location
+			}
+		});
+		
+		loadMenuItem.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent pEvent)
+			{
+				// TODO: pop up an explorer window
+				// TODO: call load at that location
+			}
+		});
+		
+		exitMenuItem.addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent pEvent)
+			{
+				System.exit(0);
 			}
 		});
 		
