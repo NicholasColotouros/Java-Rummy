@@ -30,23 +30,32 @@ import javax.swing.SwingUtilities;
 @SuppressWarnings("serial")
 public class JavaRummyUI extends JFrame
 {
+	// Instance of Game Engine
 	public static final GameEngine INSTANCE = GameEngine.getInstance(); 
+	public static final int HAND_SIZE = GameEngine.getHandSize();
 	
+	// Getting the strings to be used
 	public static final String RESOURCE_BUNDLE_NAME = "JavaRummyUIBundle";
 	public static final Locale LOCALE = Locale.CANADA;
 	public static final ResourceBundle STRINGS = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, LOCALE);
 	
-	public static final String TITLE = STRINGS.getString("title");
+	public static final String TITLE = STRINGS.getString("title");	
 	
-	public static final int HAND_SIZE = GameEngine.getHandSize();
-	public static final Dimension DEFAULT_SIZE = new Dimension(800, 600);
-	public static final int VERTICAL_GAP = 5;
+	private static final Dimension DEFAULT_SIZE = new Dimension(800, 600);
+	private static final int VERTICAL_GAP = 5;
 		
-	public static final CardSelectionPanel PLAYER1_PANEL = new CardSelectionPanel(HAND_SIZE);
-	public static final HandPanel PLAYER2_PANEL = new HandPanel(HAND_SIZE);
+	
+	// The panels used
+	private static final CardSelectionPanel PLAYER1_PANEL = new CardSelectionPanel(HAND_SIZE);
+	private static final HandPanel PLAYER2_PANEL = new HandPanel(HAND_SIZE);
 	
 	private final DeckPanel aDeckPanel;
 	private final DeckPanel aDiscardPanel;
+	
+	// The background color to be used
+	private static final int RED = 0;
+	private static final int GREEN = 102;
+	private static final int BLUE = 0;
 
 	/**
 	 * Default constructor.
@@ -71,7 +80,7 @@ public class JavaRummyUI extends JFrame
 		}
 	
 		aDeckPanel = new DeckPanel(deck.size(), null);
-		aDiscardPanel = new DeckPanel(deck.size(), new Card(Card.Rank.ACE, Card.Suit.SPADES)); // TODO change -- debugging only
+		aDiscardPanel = new DeckPanel(1, deck.draw()); // TODO change -- debugging only
 
 		JPanel centerPanel = new JPanel();
 
