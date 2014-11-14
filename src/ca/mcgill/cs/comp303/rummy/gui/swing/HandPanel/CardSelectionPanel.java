@@ -1,6 +1,5 @@
 package ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,12 +16,14 @@ import javax.swing.Timer;
 import ca.mcgill.cs.comp303.rummy.gui.swing.CardImages;
 import ca.mcgill.cs.comp303.rummy.model.Card;
 
-// TODO: make it a game listener to get updates when the player makes a move
 /**
  * Supports displaying cards and selecting one. Also a nice demonstration
  * of the Composite and Decorator design patterns in action.
  * 
  * @author Martin P. Robillard McGill University 3 November 2014
+ * 
+ * Modified by @author Nicholas Nathan Colotouros to remove default color setting and
+ * added getter method to get the selected card.
  */
 @SuppressWarnings("serial")
 public class CardSelectionPanel extends JPanel implements ActionListener
@@ -103,6 +104,15 @@ public class CardSelectionPanel extends JPanel implements ActionListener
 		}
 		aLabel.setIcon(icon);
 		repaint();
+	}
+	
+	/**
+	 * 
+	 * @return the selected card.
+	 */
+	public Card getSelectedCard()
+	{
+		return aCards[aSelected];
 	}
 	
 	private int getSelectedCardIndex(int pX, int pY)
