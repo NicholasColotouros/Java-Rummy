@@ -39,9 +39,12 @@ public class JavaRummyUI extends JFrame
 	
 	public static final int HAND_SIZE = GameEngine.getHandSize();
 	public static final Dimension DEFAULT_SIZE = new Dimension(800, 600);
+	public static final int VERTICAL_GAP = 5;
 		
 	public static final CardSelectionPanel PLAYER1_PANEL = new CardSelectionPanel(HAND_SIZE);
 	public static final HandPanel PLAYER2_PANEL = new HandPanel(HAND_SIZE);
+	
+	public final DeckPanel aDeckPanel;
 
 	/**
 	 * Default constructor.
@@ -64,11 +67,14 @@ public class JavaRummyUI extends JFrame
 			p1Cards[i] = deck.draw();
 			p2Cards[i] = deck.draw();
 		}
+	
+		aDeckPanel = new DeckPanel(deck.size());
 		
 		PLAYER1_PANEL.loadCards(p1Cards);
 		PLAYER2_PANEL.updateHand(p2Cards);
 		
 		add(PLAYER2_PANEL, BorderLayout.NORTH);
+		add(aDeckPanel, BorderLayout.CENTER);
 		add(PLAYER1_PANEL, BorderLayout.SOUTH);
 	}
 	
