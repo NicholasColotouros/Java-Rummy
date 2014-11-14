@@ -23,8 +23,10 @@ import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
 public final class GameEngine extends Observable implements Serializable
 {
 	private static final long serialVersionUID = 3306656900603120034L;
+	
 	private static final int KNOCK_SCORE = 10;
-
+	private static final int HAND_SIZE = 10;
+	
 	private static GameEngine aGameInstance = new GameEngine();
 	private static ArrayList<ILoggerObserver> aObservers;
 	
@@ -57,6 +59,7 @@ public final class GameEngine extends Observable implements Serializable
 	
 	private GameEngine()
 	{
+		newGame("Player 1", "HAL 9000");
 		reset();
 	}
 	
@@ -85,16 +88,14 @@ public final class GameEngine extends Observable implements Serializable
 		{
 			try
 			{
-				aPlayer1.addCard(aDeck.draw());
-				aPlayer2.addCard(aDeck.draw());
+				 aPlayer1.addCard(aDeck.draw());
+				 aPlayer2.addCard(aDeck.draw());
 			}
 			catch (CannotPerformActionException e)
 			{
-			//	logEvent(Level.SEVERE, "Draw failed during reset.");
 			}
 		}
 		aPhase = GamePhase.FIRSTDRAW;
-		logEvent(Level.INFO, Event.RESET, null, null);	
 	}
 	
 	/**
@@ -372,6 +373,15 @@ public final class GameEngine extends Observable implements Serializable
 	}
 	
 	/**
+	 * Gets the size of each player's hand.
+	 * @return The hand size.
+	 */
+	public static int getHandSize()
+	{
+		return HAND_SIZE;
+	}
+	
+	/**
 	 * The number of cards left in the deck.
 	 * @return the number of cards left in the deck.
 	 */
@@ -430,11 +440,11 @@ public final class GameEngine extends Observable implements Serializable
 	 */
 	private static void logEvent(Level pPriority, Event pEvent, Player pPlayer, Card pCard)
 	{
-		
-		for(ILoggerObserver o: aObservers)
-		{
-			o.logEvent(pPriority, pEvent, pPlayer, pCard);
-		}
+		// TODO: this causes an exception to be thrown
+//		for(ILoggerObserver o: aObservers)
+//		{
+//			o.logEvent(pPriority, pEvent, pPlayer, pCard);
+//		}
 	}
 	
 	private static void logKnock(Level pPriority, Player pKnocker, Player pPlayer1, Player pPlayer2, int pScoreDifference, boolean pHasGin)
