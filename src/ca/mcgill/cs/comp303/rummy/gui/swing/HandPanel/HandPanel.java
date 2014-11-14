@@ -1,5 +1,7 @@
 package ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel;
 
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -7,11 +9,8 @@ import ca.mcgill.cs.comp303.rummy.gui.swing.CardImages;
 import ca.mcgill.cs.comp303.rummy.model.Card;
 
 // TODO: make this an observer to the gameEngine
-// TODO: figure out how to implement this such that we have an un-interactable version for the AI
-	// and one clickable version for the player with buttons for discarding and knicking (may need other classes)
-
 /**
- * 
+ * The handpanel for the AI.
  * @author Nathan
  *
  */
@@ -19,33 +18,37 @@ import ca.mcgill.cs.comp303.rummy.model.Card;
 public class HandPanel extends JPanel
 {
 	private static final int SHIFT = 30; // Horizontal shift
-	private static final int HAND_SIZE = 10;
 	
+	private static final int CARD_WIDTH = CardImages.getBack().getIconWidth();
+	private static final int PREFERRED_HEIGHT = CardImages.getBack().getIconHeight();
+
+	private final int aHandSize;
+
 	private JLabel aLabel = new JLabel();
-	private CompositeIcon aHand;
-	
+		
 	/**
 	 * Default constructor.
+	 * @param pMaxCards The maximum number of cards that can be held
 	 */
-	public HandPanel()
+	public HandPanel(int pMaxCards)
 	{
+		aHandSize = pMaxCards;
+		
 		add(aLabel);
-		aHand = new CompositeIcon();
-		for(int i = 0; i < HAND_SIZE; i++)
-		{
-			aHand.addIcon(new ShiftIcon(SHIFT*i, 0, CardImages.getBack()));
-		}
-		aLabel.setIcon(aHand);
+		setPreferredSize(new Dimension((aHandSize -1) * SHIFT + CARD_WIDTH, PREFERRED_HEIGHT));
 	}
 	
-	// TODO update method associated with being an observer to the gameEngine
-	public void update(Card[] pHand)
+	/**
+	 * Updates the cards in the Hand.
+	 * @param pHand The set of cards to be shown.
+	 */
+	public void updateHand(Card[] pHand)
 	{
-		aHand = new CompositeIcon();
+		CompositeIcon hand = new CompositeIcon();
 		for(int i = 0; i < pHand.length; i++)
 		{
-			aHand.addIcon(new ShiftIcon(SHIFT*i, 0, CardImages.getCard(pHand[i])));
+			hand.addIcon(new ShiftIcon(SHIFT*i, 0, CardImages.getCard(pHand[i])));
 		}
-		aLabel.setIcon(aHand);
+		aLabel.setIcon(hand);
 	}
 }

@@ -1,12 +1,17 @@
 package ca.mcgill.cs.comp303.rummy.gui.swing;
 
+import ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel.CardSelectionPanel;
 import ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel.HandPanel;
+import ca.mcgill.cs.comp303.rummy.model.Card;
+import ca.mcgill.cs.comp303.rummy.model.Deck;
+import ca.mcgill.cs.comp303.rummy.model.GameEngine;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
@@ -24,14 +29,20 @@ import javax.swing.SwingUtilities;
 @SuppressWarnings("serial")
 public class JavaRummyUI extends JFrame
 {
+	public static final GameEngine INSTANCE = GameEngine.getInstance(); 
+	
 	public static final String RESOURCE_BUNDLE_NAME = "JavaRummyUIBundle";
 	public static final Locale LOCALE = Locale.CANADA;
 	public static final ResourceBundle STRINGS = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, LOCALE);
 	
 	public static final String TITLE = STRINGS.getString("title");
 	
+	public static final int HAND_SIZE = GameEngine.getHandSize();
 	public static final Dimension DEFAULT_SIZE = new Dimension(800, 600);
-	
+		
+	public static final CardSelectionPanel PLAYER1_PANEL = new CardSelectionPanel(HAND_SIZE);
+	public static final HandPanel PLAYER2_PANEL = new HandPanel(HAND_SIZE);
+
 	/**
 	 * Default constructor.
 	 */
@@ -44,7 +55,21 @@ public class JavaRummyUI extends JFrame
 		setJMenuBar(createMenuBar());
 		setLayout(new BorderLayout());
 
-		add(new HandPanel(), BorderLayout.NORTH);
+		// TODO remove this randomly generated hand code: is only for testing purposes since the GE is borked
+		Card[] p1Cards = new Card[HAND_SIZE];
+		Card[] p2Cards = new Card[HAND_SIZE];
+		Deck deck = new Deck();
+		for(int i = 0; i < HAND_SIZE; i++)
+		{
+			p1Cards[i] = deck.draw();
+			p2Cards[i] = deck.draw();
+		}
+		
+		PLAYER1_PANEL.loadCards(p1Cards);
+		PLAYER2_PANEL.updateHand(p2Cards);
+		
+		add(PLAYER2_PANEL, BorderLayout.NORTH);
+		add(PLAYER1_PANEL, BorderLayout.SOUTH);
 	}
 	
 	private JMenuBar createMenuBar()
