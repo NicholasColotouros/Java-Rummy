@@ -11,7 +11,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card;
 // TODO: make this an observer to the gameEngine
 /**
  * The handpanel for the AI.
- * @author Nathan
+ * @author Nicholas Nathan Colotoutors
  *
  */
 @SuppressWarnings("serial")

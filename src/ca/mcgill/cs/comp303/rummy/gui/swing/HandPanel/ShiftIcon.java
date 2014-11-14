@@ -7,7 +7,7 @@ import javax.swing.Icon;
 
 /**
  * 
- * @author Nathan
+ * @author Nicholas Nathan Colotoutors
  *
  */
 public class ShiftIcon implements Icon

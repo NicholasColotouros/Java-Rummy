@@ -14,7 +14,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card;
 
 /**
  * Visual representation of a deck.
- * @author Nathan
+ * @author Nicholas Nathan Colotoutors
  *
  */
 @SuppressWarnings("serial")

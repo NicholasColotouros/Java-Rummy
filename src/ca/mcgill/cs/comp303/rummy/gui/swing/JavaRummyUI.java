@@ -27,7 +27,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * 
- * @author Nathan
+ * @author Nicholas Nathan Colotouros
  *
  */
 @SuppressWarnings("serial")

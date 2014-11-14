@@ -8,7 +8,7 @@ import org.junit.Test;
 
 /**
  * 
- * @author Nathan
+ * @author Nicholas Nathan Colotoutors
  *
  */
 public class TestCard
