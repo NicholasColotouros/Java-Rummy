@@ -7,6 +7,7 @@ import ca.mcgill.cs.comp303.rummy.model.Deck;
 import ca.mcgill.cs.comp303.rummy.model.GameEngine;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +45,12 @@ public class JavaRummyUI extends JFrame
 	private static final Dimension DEFAULT_SIZE = new Dimension(800, 600);
 	private static final int VERTICAL_GAP = 5;
 		
-	
+	// The background color to be used
+	private static final int RED = 0;
+	private static final int GREEN = 102;
+	private static final int BLUE = 0;
+	private static final Color BG_COLOR = new Color(RED, GREEN, BLUE);
+
 	// The panels used
 	private static final CardSelectionPanel PLAYER1_PANEL = new CardSelectionPanel(HAND_SIZE);
 	private static final HandPanel PLAYER2_PANEL = new HandPanel(HAND_SIZE);
@@ -52,10 +58,6 @@ public class JavaRummyUI extends JFrame
 	private final DeckPanel aDeckPanel;
 	private final DeckPanel aDiscardPanel;
 	
-	// The background color to be used
-	private static final int RED = 0;
-	private static final int GREEN = 102;
-	private static final int BLUE = 0;
 
 	/**
 	 * Default constructor.
@@ -93,6 +95,13 @@ public class JavaRummyUI extends JFrame
 		add(PLAYER2_PANEL, BorderLayout.NORTH);
 		add(centerPanel, BorderLayout.CENTER);
 		add(PLAYER1_PANEL, BorderLayout.SOUTH);
+
+		PLAYER1_PANEL.setBackground(BG_COLOR);
+		PLAYER2_PANEL.setBackground(BG_COLOR);
+		aDeckPanel.setBackground(BG_COLOR);
+		aDiscardPanel.setBackground(BG_COLOR);
+		centerPanel.setBackground(BG_COLOR);
+		setBackground(BG_COLOR);
 	}
 	
 	private JMenuBar createMenuBar()
