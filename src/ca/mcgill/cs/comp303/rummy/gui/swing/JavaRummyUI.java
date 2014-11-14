@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -83,7 +85,8 @@ public class JavaRummyUI extends JFrame
 	
 		aDeckPanel = new DeckPanel(deck.size(), null);
 		aDiscardPanel = new DeckPanel(1, deck.draw()); // TODO change -- debugging only
-
+		addDeckActionListeners();
+		
 		JPanel centerPanel = new JPanel();
 
 		centerPanel.add(aDeckPanel);
@@ -102,6 +105,27 @@ public class JavaRummyUI extends JFrame
 		aDiscardPanel.setBackground(BG_COLOR);
 		centerPanel.setBackground(BG_COLOR);
 		setBackground(BG_COLOR);
+	}
+
+	private void addDeckActionListeners()
+	{
+		aDeckPanel.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent pEvent)
+			{
+				// TODO: draw card from deck
+			}
+		});
+		
+		aDiscardPanel.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent pEvent)
+			{
+				// TODO: draw card from discard panel
+			}
+		});
 	}
 	
 	private JMenuBar createMenuBar()

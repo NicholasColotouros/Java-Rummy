@@ -18,7 +18,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card;
  *
  */
 @SuppressWarnings("serial")
-public class DeckPanel extends JPanel implements ActionListener
+public class DeckPanel extends JPanel
 {
 	private static final int MAX_CARDS_HIDDEN = 4;
 	private static final int HIDDEN_CARD_FACTOR = 10; // adds a new card beneath the top every x cards. MUST be > 0.
@@ -74,12 +74,5 @@ public class DeckPanel extends JPanel implements ActionListener
 		
 		aLabel.setIcon(icon);
 		repaint();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent pEvent)
-	{
-		// TODO deck clicked --> draw card
-		
 	}
 }
