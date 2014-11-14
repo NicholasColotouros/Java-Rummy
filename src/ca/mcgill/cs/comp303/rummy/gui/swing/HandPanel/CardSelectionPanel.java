@@ -130,9 +130,9 @@ public class CardSelectionPanel extends JPanel implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
+	public void actionPerformed(ActionEvent pEvent)
 	{
-		((JButton)e.getSource()).setEnabled(false);
+		((JButton)pEvent.getSource()).setEnabled(false);
 		startAnimation();
 	}
 	
