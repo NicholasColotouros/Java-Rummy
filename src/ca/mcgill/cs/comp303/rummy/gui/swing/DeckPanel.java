@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -33,29 +34,42 @@ public class DeckPanel extends JPanel implements ActionListener
 	/**
 	 * Constructor.
 	 * @param pDeckSize the initial size of the deck.
+	 * @param pTopCard the card at the top of the deck. If it's null, the card back will be used.
 	 */
-	public DeckPanel(int pDeckSize)
+	public DeckPanel(int pDeckSize, Card pTopCard)
 	{
 		setPreferredSize(new Dimension(PREFERRED_WIDTH, PREFERRED_HEIGHT));
 		add(aLabel);
-		paintDeck(pDeckSize);
+		paintDeck(pDeckSize, pTopCard);
 	}
 	
 	/**
 	 * Updates the deck according to the size.
 	 * @param pDeckSize The new size of the deck.
+	 * @param pTopCard the card at the top of the deck. If it's null, the card back will be used.
 	 */
-	public void paintDeck(int pDeckSize)
+	public void paintDeck(int pDeckSize, Card pTopCard)
 	{
 		CompositeIcon icon = new CompositeIcon();
-	
+		ImageIcon cardIcon;
+		if(pTopCard == null)
+		{
+			cardIcon = CardImages.getBack();
+		}
+		
+		else
+		{
+			cardIcon = CardImages.getCard(pTopCard);
+		}
+		
 		if(pDeckSize > 0)
 		{
-			int i;
-			for(i = 0; i < (pDeckSize / HIDDEN_CARD_FACTOR) + 1; i++)
+			int i = 0;
+			for(i = 0; i < (pDeckSize / HIDDEN_CARD_FACTOR); i++)
 			{
-				icon.addIcon(new ShiftIcon(i * HORIZONTAL_OFFSET, i * VERTICAL_OFFSET, CardImages.getBack()));				
+				icon.addIcon(new ShiftIcon(i * HORIZONTAL_OFFSET, i * VERTICAL_OFFSET, CardImages.getBack()));
 			}
+			icon.addIcon(new ShiftIcon(i * HORIZONTAL_OFFSET, i * VERTICAL_OFFSET, cardIcon));
 		}
 		
 		aLabel.setIcon(icon);

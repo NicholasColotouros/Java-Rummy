@@ -19,6 +19,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -44,7 +45,8 @@ public class JavaRummyUI extends JFrame
 	public static final CardSelectionPanel PLAYER1_PANEL = new CardSelectionPanel(HAND_SIZE);
 	public static final HandPanel PLAYER2_PANEL = new HandPanel(HAND_SIZE);
 	
-	public final DeckPanel aDeckPanel;
+	private final DeckPanel aDeckPanel;
+	private final DeckPanel aDiscardPanel;
 
 	/**
 	 * Default constructor.
@@ -68,13 +70,19 @@ public class JavaRummyUI extends JFrame
 			p2Cards[i] = deck.draw();
 		}
 	
-		aDeckPanel = new DeckPanel(deck.size());
+		aDeckPanel = new DeckPanel(deck.size(), null);
+		aDiscardPanel = new DeckPanel(deck.size(), new Card(Card.Rank.ACE, Card.Suit.SPADES)); // TODO change -- debugging only
+
+		JPanel centerPanel = new JPanel();
+
+		centerPanel.add(aDeckPanel);
+		centerPanel.add(aDiscardPanel);
 		
 		PLAYER1_PANEL.loadCards(p1Cards);
 		PLAYER2_PANEL.updateHand(p2Cards);
 		
 		add(PLAYER2_PANEL, BorderLayout.NORTH);
-		add(aDeckPanel, BorderLayout.CENTER);
+		add(centerPanel, BorderLayout.CENTER);
 		add(PLAYER1_PANEL, BorderLayout.SOUTH);
 	}
 	
