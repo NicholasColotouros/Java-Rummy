@@ -12,9 +12,11 @@ import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 public class Player implements Serializable
 {
 	private static final long serialVersionUID = 6763429439067353883L;
+	
 	private final String aName;
 	private int aScore;
 	private Hand aHand;
+	
 	private Card aLastCardDrawn;
 	
 	/**
@@ -32,18 +34,13 @@ public class Player implements Serializable
 	 * Adds a card to the players hand.
 	 * @param pCard the card to be added
 	 * @throws CannotPerformActionException if a null card is passed or a duplicate card is passed
+	 * @pre pCard != null
 	 */
 	public void addCard(Card pCard) throws CannotPerformActionException
 	{
 		if(aHand.contains(pCard))
 		{
 			throw new CannotPerformActionException("Cannot add a card already in the hand.");
-		}
-		
-		// Last hand in dealing
-		if(pCard == null)
-		{
-			aLastCardDrawn = null;
 		}
 		
 		else
