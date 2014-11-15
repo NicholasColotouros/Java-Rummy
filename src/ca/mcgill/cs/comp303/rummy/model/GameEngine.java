@@ -102,11 +102,25 @@ public final class GameEngine extends Observable implements Serializable
 	 * Starts a new game.
 	 * @param pP1Name Player 1s name
 	 * @param pP2Name Player 2s name
+	 * @pre p1 != null
+	 * @pre p2 != null
 	 */
 	public void newGame(String pP1Name, String pP2Name)
 	{
-		aPlayer1 = new Player(pP1Name);
-		aPlayer2 = new Player(pP2Name);
+		String p1 = pP1Name;
+		String p2 = pP2Name;
+		
+		if(p1.equals(""))
+		{
+			p1 = new String("Player 1");
+		}
+		if(p2.equals(""))
+		{
+			p2 = new String("HAL 9000");
+		}
+		
+		aPlayer1 = new Player(p1);
+		aPlayer2 = new Player(p2);
 		reset();
 		
 	//	logEvent(Level.INFO, "Starting new game.");			

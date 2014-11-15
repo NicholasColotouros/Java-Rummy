@@ -62,8 +62,10 @@ public class JavaRummyUI extends JFrame
 
 	/**
 	 * Default constructor.
+	 * @param pP1Name The name for Player 1
+	 * @param pP2Name The name for Player 2
 	 */
-	public JavaRummyUI()
+	public JavaRummyUI(String pP1Name, String pP2Name)
 	{
 		super(TITLE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +73,9 @@ public class JavaRummyUI extends JFrame
 		
 		setJMenuBar(createMenuBar());
 		setLayout(new BorderLayout());
-
+		
+		INSTANCE.newGame(STRINGS.getString("player1"), "");
+		
 		// TODO remove this randomly generated hand code: is only for testing purposes since the GE is borked
 		Card[] p1Cards = new Card[HAND_SIZE];
 		Card[] p2Cards = new Card[HAND_SIZE];
@@ -104,6 +108,8 @@ public class JavaRummyUI extends JFrame
 		aDiscardPanel.setBackground(BG_COLOR);
 		centerPanel.setBackground(BG_COLOR);
 		setBackground(BG_COLOR);
+		
+		INSTANCE.newGame(pP1Name, pP2Name);
 	}
 
 	private void addDeckActionListeners()
@@ -135,9 +141,12 @@ public class JavaRummyUI extends JFrame
 		JMenu fileMenu = new JMenu(STRINGS.getString("file"));
 		JMenu helpMenu = new JMenu(STRINGS.getString("help"));
 		
+		JMenuItem newGameMenuItem = new JMenuItem(STRINGS.getString("new_game"));
 		JMenuItem saveMenuItem = new JMenuItem(STRINGS.getString("save"));
 		JMenuItem loadMenuItem = new JMenuItem(STRINGS.getString("load"));
 		JMenuItem exitMenuItem = new JMenuItem(STRINGS.getString("exit"));
+		fileMenu.add(newGameMenuItem);
+		fileMenu.addSeparator();
 		fileMenu.add(saveMenuItem);
 		fileMenu.add(loadMenuItem);
 		fileMenu.addSeparator();
@@ -152,6 +161,15 @@ public class JavaRummyUI extends JFrame
 		// Action listeners
 		
 		// Action listeners for the fileMenu
+		newGameMenuItem.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent pEvent)
+			{
+				INSTANCE.newGame(STRINGS.getString("player1"), "");
+			}
+		});
+		
 		saveMenuItem.addActionListener(new ActionListener()
 		{
 			@Override
@@ -202,7 +220,7 @@ public class JavaRummyUI extends JFrame
 			@Override
 			public void run() 
 			{
-				JavaRummyUI mainFrame = new JavaRummyUI();
+				JavaRummyUI mainFrame = new JavaRummyUI("lol", "fag");
 				mainFrame.setVisible(true);
 			}
 		});
