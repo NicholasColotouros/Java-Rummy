@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public final class Card implements Comparable<Card>, Serializable
 {
+	private static final long serialVersionUID = -4689571960084845753L;
+
 	/**
 	 * Represents the rank of the card.
 	 */
@@ -72,7 +74,10 @@ public final class Card implements Comparable<Card>, Serializable
 	 */
 	public int compareTo(Card pCard)
 	{
-		if(pCard == null) return -1;
+		if(pCard == null) 
+		{
+			return -1;
+		}
 		// This card's rank is lower, therefore the other card is better
 		if(aRank.ordinal() < pCard.aRank.ordinal())
 		{
@@ -80,7 +85,7 @@ public final class Card implements Comparable<Card>, Serializable
 		}
 		
 		// This card's rank is higher, therefore the other card is worse
-		else if(aRank.ordinal() < pCard.aRank.ordinal()) 
+		else if(aRank.ordinal() > pCard.aRank.ordinal()) 
 		{
 			return 1;
 		}
@@ -114,6 +119,10 @@ public final class Card implements Comparable<Card>, Serializable
 	public boolean equals( Object pCard ) 
 	{
 		if(pCard == null) 
+		{
+			return false;
+		}
+		if(this.getClass() != pCard.getClass())
 		{
 			return false;
 		}

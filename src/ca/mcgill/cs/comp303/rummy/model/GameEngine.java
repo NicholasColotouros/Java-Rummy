@@ -1,19 +1,15 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
 import java.io.Serializable;
-//import java.util.logging.*;
 import java.util.Observable;
 import java.util.Set;
 import java.util.Stack;
-import java.util.ArrayList;
-import java.util.logging.Level;
 
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotDrawException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotKnockException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
 import ca.mcgill.cs.comp303.rummy.exceptions.LoadException;
 import ca.mcgill.cs.comp303.rummy.exceptions.SaveException;
-import ca.mcgill.cs.comp303.rummy.logging.ILoggerObserver;
 import ca.mcgill.cs.comp303.rummy.model.Card.Rank;
 import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
 
@@ -28,17 +24,6 @@ public final class GameEngine extends Observable implements Serializable
 	private static final int HAND_SIZE = 10;
 	
 	private static GameEngine aGameInstance = new GameEngine();
-	private static ArrayList<ILoggerObserver> aObservers;
-	
-	/**
-	 * 
-	 * Represents the different event that might occur.
-	 *
-	 */
-	public enum Event
-	{
-		RESET, DRAWFROMDECK, DRAWFROMDISCARDPILE, DISCARD
-	};
 	
 	/**
 	 * Represents the state of the game.  
@@ -107,9 +92,7 @@ public final class GameEngine extends Observable implements Serializable
 	{
 		aPlayer1 = new Player(pP1Name);
 		aPlayer2 = new Player(pP2Name);
-		reset();
-		
-	//	logEvent(Level.INFO, "Starting new game.");			
+		reset();		
 	}
 	
 	/**
@@ -129,12 +112,7 @@ public final class GameEngine extends Observable implements Serializable
 		}
 		
 		// Next phase is the draw phase
-		aPhase = GamePhase.DRAW;
-		
-		//update loggers
-		logEvent(Level.INFO, Event.DISCARD, pPlayer, pCard);	
-
-		
+		aPhase = GamePhase.DRAW;		
 	}
 	
 	/**
@@ -152,19 +130,13 @@ public final class GameEngine extends Observable implements Serializable
 		}
 		catch (CannotPerformActionException e)
 		{
-		//	String message = new String(pPlayer.getName() + " cannot draw from the deck: added duplicate card to hand");
-//			logEvent(Level.SEVERE, message);
 		}
 		
 		if(aDeck.size() == 2)
 		{
 			aPhase = GamePhase.ENDGAME;
 		}
-		aPhase = GamePhase.DISCARD;
-		
-		//update loggers
-		logEvent(Level.INFO, Event.DRAWFROMDECK, pPlayer, null);	
-
+		aPhase = GamePhase.DISCARD;		
 	}
 	
 	/**
@@ -180,9 +152,7 @@ public final class GameEngine extends Observable implements Serializable
 		
 		if(aDiscardPile.isEmpty()) 
 		{
-			String message = new String("Cannot draw from discard pile: no cards to draw.");
-	//		logEvent(Level.SEVERE, message);
-			throw new CannotDrawException(message);
+			throw new CannotDrawException();
 		}
 		try
 		{
@@ -192,17 +162,11 @@ public final class GameEngine extends Observable implements Serializable
 		catch (CannotPerformActionException e)
 		{
 			String message = new String("Cannot draw from deck: Added duplicate card to hand.");
-	//		logEvent(Level.SEVERE, message);
 			throw new CannotDrawException(message);
 		}
 
 		// Next phase is discard
-		aPhase = GamePhase.DISCARD;
-		
-		//update loggers
-		
-		logEvent(Level.INFO, Event.DRAWFROMDISCARDPILE, pPlayer, tmp);	
-
+		aPhase = GamePhase.DISCARD;		
 	}
 	
 	/**
@@ -266,7 +230,6 @@ public final class GameEngine extends Observable implements Serializable
 		assert pPointsGained >= 0;
 		
 		pWinner.incrementScore(pPointsGained);
-		logKnock(Level.INFO, pWinner, aPlayer1, aPlayer2, pPointsGained, pHasGin);
 	}
 	
 	/**
@@ -403,11 +366,8 @@ public final class GameEngine extends Observable implements Serializable
 		}
 		catch(SaveException e)
 		{
-		//	logEvent(Level.SEVERE, "An error occurred while saving: " + e.getLocalizedMessage());
 			throw e;
-		}
-		
-	//	logEvent(Level.INFO, "Game successfully saved to: " + pPath);
+		}		
 	}
 	
 	/**
@@ -424,34 +384,7 @@ public final class GameEngine extends Observable implements Serializable
 		}
 		catch(LoadException e)
 		{
-	//		logEvent(Level.SEVERE, "An error occurred while loading: " + e.getLocalizedMessage());
 			throw e;
-		}
-		
-	//	logEvent(Level.INFO, "Game successfully loaded from: " + pPath);
-	}
-	
-	/**
-	 * Update all observers for the following actions: reset, discard, drawFromDeck,
-	 * drawFromDiscardPile,knocks.
-	 * @param pPriority the priority of the message
-	 * @param pMessage the message
-	 * 
-	 */
-	private static void logEvent(Level pPriority, Event pEvent, Player pPlayer, Card pCard)
-	{
-		// TODO: this causes an exception to be thrown
-//		for(ILoggerObserver o: aObservers)
-//		{
-//			o.logEvent(pPriority, pEvent, pPlayer, pCard);
-//		}
-	}
-	
-	private static void logKnock(Level pPriority, Player pKnocker, Player pPlayer1, Player pPlayer2, int pScoreDifference, boolean pHasGin)
-	{
-		for(ILoggerObserver o: aObservers)
-		{
-			o.logKnock(pPriority, pKnocker, pPlayer1, pPlayer2, pScoreDifference, pHasGin);
-		}
-	}
+		}		
+	}	
 }

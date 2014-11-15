@@ -46,21 +46,21 @@ public class CardSet implements ICardSet, Serializable
 	@Override
 	public boolean isGroup()
 	{
-		if (aCards.size() != 3 || aCards.size() != 4)
+		// Need to have 3 or 4 cards
+		if (aCards.size() < 3 || aCards.size() > 4)
 		{
 			return false;
-		} //Need to have three or more cards
+		}
 		
 		ArrayList<Card> aList = new ArrayList<Card>(aCards);
 		
-		Card.Rank rank = null; //Loop through cards, check if they have the same rank
-		for(Card c1 : aList) 
+		Card.Rank rank = aList.get(0).getRank(); 
+		
+		//Loop through cards, check if they have the same rank
+		for(Card c : aList) 
 		{
-			if(rank == null) 
-			{ 
-				rank = c1.getRank(); 
-			} //set the first one, then check each after
-			else if( rank.ordinal() != (c1.getRank().ordinal()) ) 
+			//set the first one, then check each after
+			if( rank.ordinal() != (c.getRank().ordinal()) ) 
 			{
 					return false;
 			}
@@ -74,44 +74,33 @@ public class CardSet implements ICardSet, Serializable
 		if (aCards.size() < 3) 
 		{
 			return false;
-		} //Need to have three or more cards
+		}
 		
+		//Need to have three or more cards
 		ArrayList<Card> aList = new ArrayList<Card>(aCards);
-		Collections.sort(aList, new Comparator<Card>() { //Sorts the cards, so we can check if they are sequential
-			public int compare(Card pC1, Card pC2) 
-			{
-				if(pC1.getRank().ordinal() > pC2.getRank().ordinal()) 
-				{
-					return Integer.MAX_VALUE;
-				}
-				else if(pC1.getRank().ordinal() == pC2.getRank().ordinal()) 
-				{ 
-					return Integer.MIN_VALUE; 
-				} 
-				else 
-				{
-					return 0; 
-				}
-			};
-		});
+		Collections.sort(aList);
 		
 		Card.Suit suit = null;
-		Card.Rank prevRank = null; //Loop through cards, check if each is 1 more than previous
-		for(Card c1 : aList) 
+		Card.Rank prevRank = null; 
+		
+		//Loop through cards, check if each is 1 more than previous
+		for(Card c : aList) 
 		{
 			if (suit == null) 
 			{
-				suit = c1.getSuit(); 
+				suit = c.getSuit(); 
 			}
 			if(prevRank == null) 
 			{ 
-				prevRank = c1.getRank(); 
-			} //set the first one, then check each after
-			else if( (prevRank.ordinal() != (c1.getRank().ordinal() + 1)) || suit != c1.getSuit()) 
+				prevRank = c.getRank(); 
+			} 
+			
+			else if( suit != c.getSuit() && prevRank.ordinal() >= c.getRank().ordinal()) 
 			{
 					return false;
 			}
+			prevRank = c.getRank();
 		}
-		return true; //there are >=3 and in order they are consecutive
+		return true;
 	}
 }

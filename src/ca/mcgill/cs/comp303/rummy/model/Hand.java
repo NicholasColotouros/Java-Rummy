@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.HashSet;
-
-import ca.mcgill.cs.comp303.rummy.model.Card.Rank;
 
 /**
  * Models a hand of 10 cards. The hand is not sorted. Not threadsafe.
@@ -16,13 +13,10 @@ import ca.mcgill.cs.comp303.rummy.model.Card.Rank;
  * @inv size() > 0
  * @inv size() <= HAND_SIZE
  */
-public class Hand implements Serializable
+public class Hand implements Serializable, Iterable
 {
 	public static final int HAND_SIZE = 10;
 	private ArrayList<Card> aCards;
-	private ArrayList<Card> aUnmatched;
-	private ArrayList<ICardSet> aRuns;
-	private ArrayList<ICardSet> aGroups;
 	
 	/**
 	 * Creates a new, empty hand.
@@ -30,20 +24,20 @@ public class Hand implements Serializable
 	public Hand()
 	{
 		aCards = new ArrayList<Card>();
-		aUnmatched = new ArrayList<Card>();
-		aRuns = new ArrayList<ICardSet>();
-		aGroups = new ArrayList<ICardSet>();
 	}
 	
 	/**
 	 * Adds pCard to the list of unmatched cards.
 	 * If the card is already in the hand, it is not added.
 	 * @param pCard The card to add.
+	 * @throws HandException if the hand is complete.
+	 * @throws HandException if the card is already in the hand.
 	 * @pre pCard != null
 	 */
 	public void add( Card pCard )
 	{
-		aUnmatched.add(pCard);
+		aCards.add(pCard);
+		Collections.sort(aCards);
 	}
 	
 	/**
@@ -56,33 +50,6 @@ public class Hand implements Serializable
 	public void remove( Card pCard )
 	{
 		aCards.remove(pCard);
-		aUnmatched.remove(pCard);
-		// Remove any runs containing the card to remove.
-		ArrayList<ICardSet> runsToRemove = new ArrayList<ICardSet>();
-		for (ICardSet run : aRuns) 
-		{
-			if (run.contains(pCard)) 
-			{
-				runsToRemove.add(run);	
-			}
-		}
-		for (ICardSet run : runsToRemove)
-		{
-			aRuns.remove(run);
-		}
-		// Remove any groups containing the card to remove.
-		ArrayList<ICardSet> groupsToRemove = new ArrayList<ICardSet>();
-		for (ICardSet group : aGroups) 
-		{
-			if (group.contains(pCard))
-			{
-				groupsToRemove.add(group);
-			}
-		}
-		for (ICardSet group : groupsToRemove)
-		{
-			aGroups.remove(group);
-		}
 	}
 	
 	/**
@@ -90,11 +57,11 @@ public class Hand implements Serializable
 	 */
 	public boolean isComplete()
 	{
-		if (this.size() == HAND_SIZE) 
+		if(aCards.size() == HAND_SIZE)
 		{
 			return true;
 		}
-		return false; 
+		return false;
 	}
 	
 	/**
@@ -103,9 +70,6 @@ public class Hand implements Serializable
 	public void clear()
 	{
 		aCards = new ArrayList<Card>();
-		aUnmatched = new ArrayList<Card>();
-		aRuns = new ArrayList<ICardSet>();
-		aGroups = new ArrayList<ICardSet>();
 	}
 	
 	/**
@@ -113,9 +77,7 @@ public class Hand implements Serializable
 	 */
 	public Set<ICardSet> getMatchedSets()
 	{
-		HashSet<ICardSet> matched = new HashSet<ICardSet>(aGroups);
-		matched.addAll(aRuns);
-		return matched;
+		return null; // TODO
 	}
 	
 	/**
@@ -123,7 +85,7 @@ public class Hand implements Serializable
 	 */
 	public Set<Card> getUnmatchedCards()
 	{
-		return new HashSet<Card>(aUnmatched);
+		return null; // TODO
 	}
 	
 	/**
@@ -131,7 +93,7 @@ public class Hand implements Serializable
 	 */
 	public int size()
 	{
-		return this.aCards.size(); 
+		return aCards.size();
 	}
 	
 	/**
@@ -139,11 +101,15 @@ public class Hand implements Serializable
 	 * unmatched card or as part of a set.
 	 * @param pCard The card to check.
 	 * @return true if the card is already in the hand.
-	 * @pre pCard != null 
+	 * @pre pCard != null
 	 */
 	public boolean contains( Card pCard )
 	{
-		return aCards.contains(pCard);
+		if(aCards.contains(pCard))
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -151,19 +117,32 @@ public class Hand implements Serializable
 	 */
 	public int score()
 	{
-		int score = 0;
-		for (Card c : this.aUnmatched)
-		{
-			int cardPoints = c.getRank().ordinal() + 1;
-			if (cardPoints > HAND_SIZE)
-			{
-				cardPoints = HAND_SIZE;
-			}
-			score += cardPoints;
-		}
-		return score; 
+		return Integer.MAX_VALUE; // TODO
 	}
 	
+	/**
+	 * Creates a group of cards of the same rank.
+	 * @param pCards The cards to groups
+	 * @pre pCards != null
+	 * @throws HandException If the cards in pCard are not all unmatched
+	 * cards of the hand or if the group is not a valid group.
+	 */
+	public void createGroup( Set<Card> pCards )
+	{
+		// TODO
+	}
+	
+	/**
+	 * Creates a run of cards of the same suit.
+	 * @param pCards The cards to group in a run
+	 * @pre pCards != null
+	 * @throws HandException If the cards in pCard are not all unmatched
+	 * cards of the hand or if the group is not a valid group.
+	 */
+	public void createRun( Set<Card> pCards )
+	{
+		// TODO
+	}
 	
 	/**
 	 * Calculates the matching of cards into groups and runs that
@@ -171,63 +150,12 @@ public class Hand implements Serializable
 	 */
 	public void autoMatch()
 	{
-		HashSet<CardSet> sets = new HashSet<CardSet>();
-		
-		// TODO: current implementation just makes groups
-		
-		// all cards are considered unmatched
-		aRuns = new ArrayList<ICardSet>();
-		aGroups = new ArrayList<ICardSet>();
-		
-		// copy the cards to the unmatched card set
-		aUnmatched = new ArrayList<Card>();
-		for(Card c : aCards)
-		{
-			aUnmatched.add(c);
-		}
-		
-		Collections.sort(aUnmatched);
-		
-		// Make groups by starting at a card and checking at most the next 4
-		for(int i = 0; i < aCards.size() - 1; i++)
-		{
-			HashSet<Card> possibleGroup = new HashSet<Card>();
-			possibleGroup.add(aCards.get(i));
-			Rank groupRank = aCards.get(i).getRank();
-			
-			for(int j = i + 1; j <= i + 4; j++)
-			{
-				// if the rank of the next card is the same as the rank of the group,
-				// add it to the group and remove it from the unmatched cards
-				Rank currentRank = aCards.get(j).getRank();
-				if(currentRank == groupRank)
-				{
-					possibleGroup.add(aCards.get(j));
-					aUnmatched.remove(aCards.get(j));
-				}
-			}
-			
-			// if it's a group, add it to the set of all groups
-			CardSet possibleSet = new CardSet(possibleGroup);
-			if(possibleSet.isGroup())
-			{
-				aGroups.add(possibleSet);
-			}
-		}
-
+		// TODO
 	}
-	
-	/**
-	 * Gets the cards in the hand.
-	 * @return a copy of the cards in the hand
-	 */
-	public ArrayList<Card> getCards()
+
+	@Override
+	public Iterator iterator()
 	{
-		ArrayList<Card> ret = new ArrayList<Card>();
-		for(Card c : aCards)
-		{
-			ret.add(c);
-		}
-		return ret;
+		return aCards.iterator();
 	}
 }

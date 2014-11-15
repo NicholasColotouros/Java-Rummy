@@ -12,6 +12,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card.Suit;
  */
 public class Deck implements Serializable
 {
+	private static final long serialVersionUID = -4071621894946587844L;
 	private Stack<Card> aCards;
 	
 	/**
