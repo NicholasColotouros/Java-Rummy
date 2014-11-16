@@ -1,16 +1,16 @@
-package ca.mcgill.cs.comp303.rummy.gui.swing.handPanel;
+package ca.mcgill.cs.comp303.rummy.gui.swing;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotDrawException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
-import ca.mcgill.cs.comp303.rummy.gui.swing.JavaRummyUI;
 import ca.mcgill.cs.comp303.rummy.model.Card;
 import ca.mcgill.cs.comp303.rummy.model.GameEngine;
 import ca.mcgill.cs.comp303.rummy.model.GameEngine.GamePhase;
@@ -20,6 +20,7 @@ import ca.mcgill.cs.comp303.rummy.model.GameEngine.GamePhase;
  * @author Nathan
  *
  */
+@SuppressWarnings("serial")
 public class ActionButtonPanel extends JPanel
 {
 	private static final ResourceBundle STRINGS = JavaRummyUI.STRINGS;
@@ -38,8 +39,9 @@ public class ActionButtonPanel extends JPanel
 	/**
 	 * Default constructor.
 	 * @param pParent the instance of JavaRummyUI that this belongs to.
+	 * @param pCurrentPhase the current phase of the game.
 	 */
-	public ActionButtonPanel(JavaRummyUI pParent)
+	public ActionButtonPanel(JavaRummyUI pParent, GamePhase pCurrentPhase)
 	{
 		aParentPanel = pParent;
 		
@@ -95,14 +97,35 @@ public class ActionButtonPanel extends JPanel
 		PASS_BUTTON.setPreferredSize(BUTTON_DIMENSION);
 		KNOCK_BUTTON.setPreferredSize(BUTTON_DIMENSION);
 		DISCARD_BUTTON.setPreferredSize(BUTTON_DIMENSION);
-				
+		
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
 		add(PASS_BUTTON);
 		add(DISCARD_BUTTON);
 		add(KNOCK_BUTTON);
-		//TODO: call update method to make the right buttons visible
+
+		update(pCurrentPhase);
 	}
 	
-	
-	
-	// TODO: make an observer of the GameEngine
+	/**
+	 * Update method to be called by parent window.
+	 * @param pCurrentPhase the turn's current phase.
+	 */
+	public void update(GamePhase pCurrentPhase)
+	{
+		// TODO: make sure knock is de-toggled
+		if(pCurrentPhase == GamePhase.FIRSTDRAW)
+		{
+			PASS_BUTTON.setVisible(true);
+			KNOCK_BUTTON.setVisible(false);
+			// TODO: make sure discard button is disabled
+		}
+		else
+		{
+			PASS_BUTTON.setVisible(false);
+			KNOCK_BUTTON.setVisible(true);
+			// TODO: make sure discard button is enabled
+		}
+		aCurrentPhase = pCurrentPhase;
+	}
 }
