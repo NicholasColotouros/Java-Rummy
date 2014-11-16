@@ -88,6 +88,7 @@ public class ActionButtonPanel extends JPanel
 			{
 				// TODO: toggle knock and button
 				// TODO: make sure this is reset upon turn ending
+				// TODO: make the button faded when it's impossible to knock
 			}
 		});
 		
