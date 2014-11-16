@@ -1,4 +1,4 @@
-package ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel;
+package ca.mcgill.cs.comp303.rummy.gui.swing.handPanel;
 
 import java.awt.Component;
 import java.awt.Graphics;

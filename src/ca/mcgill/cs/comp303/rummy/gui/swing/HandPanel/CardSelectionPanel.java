@@ -1,4 +1,4 @@
-package ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel;
+package ca.mcgill.cs.comp303.rummy.gui.swing.handPanel;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -108,10 +108,14 @@ public class CardSelectionPanel extends JPanel implements ActionListener
 	
 	/**
 	 * 
-	 * @return the selected card.
+	 * @return the selected card. Returns null if no card is selected.
 	 */
 	public Card getSelectedCard()
 	{
+		if(aSelected < 0 || aSelected >= aCards.length)
+		{
+			return null;
+		}
 		return aCards[aSelected];
 	}
 	

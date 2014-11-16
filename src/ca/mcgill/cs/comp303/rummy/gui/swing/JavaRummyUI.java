@@ -1,7 +1,7 @@
 package ca.mcgill.cs.comp303.rummy.gui.swing;
 
-import ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel.CardSelectionPanel;
-import ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel.HandPanel;
+import ca.mcgill.cs.comp303.rummy.gui.swing.handPanel.CardSelectionPanel;
+import ca.mcgill.cs.comp303.rummy.gui.swing.handPanel.HandPanel;
 import ca.mcgill.cs.comp303.rummy.model.Card;
 import ca.mcgill.cs.comp303.rummy.model.Deck;
 import ca.mcgill.cs.comp303.rummy.model.GameEngine;
@@ -110,6 +110,14 @@ public class JavaRummyUI extends JFrame
 		setBackground(BG_COLOR);
 		
 		INSTANCE.newGame(pP1Name, pP2Name);
+	}
+	
+	/**
+	 * @return the card that has been selected by the player.
+	 */
+	public Card getSelectedCard()
+	{
+		return PLAYER1_PANEL.getSelectedCard();
 	}
 
 	private void addDeckActionListeners()

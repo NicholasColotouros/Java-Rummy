@@ -8,8 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel.CompositeIcon;
-import ca.mcgill.cs.comp303.rummy.gui.swing.HandPanel.ShiftIcon;
+import ca.mcgill.cs.comp303.rummy.gui.swing.handPanel.CompositeIcon;
+import ca.mcgill.cs.comp303.rummy.gui.swing.handPanel.ShiftIcon;
 import ca.mcgill.cs.comp303.rummy.model.Card;
 
 /**
