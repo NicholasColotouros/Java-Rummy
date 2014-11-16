@@ -130,10 +130,11 @@ public final class GameEngine extends Observable implements Serializable
 	 * Discard the card and add it to the discard pile. The card is only discarded if the player has the card to discard.
 	 * @param pPlayer The player to discard the card.
 	 * @param pCard The card to be discarded.
+	 * @param pKnock whether or not a knock will happen afterwards.
 	 * @throws CannotPerformActionException if the card discarded is the card that was previously drawn.
 	 * @pre aPhase == GamePhase.DISCARD
 	 */
-	public void discard(Player pPlayer, Card pCard) throws CannotPerformActionException
+	public void discard(Player pPlayer, Card pCard, boolean pKnock) throws CannotPerformActionException
 	{
 		assert aPhase == GamePhase.DISCARD;
 		
@@ -148,7 +149,10 @@ public final class GameEngine extends Observable implements Serializable
 		//update loggers
 		logEvent(Level.INFO, Event.DISCARD, pPlayer, pCard);	
 
-		
+		if(pKnock)
+		{
+			knock(pPlayer);
+		}
 	}
 	
 	/**
@@ -224,7 +228,7 @@ public final class GameEngine extends Observable implements Serializable
 	 * @param pPlayer the player that knocked.
 	 * @throws CannotKnockException if the player who knocked has >= 10 points of deadwood 
 	 */
-	public void knock(Player pPlayer) throws CannotKnockException
+	private void knock(Player pPlayer) throws CannotKnockException
 	{
 		if(pPlayer.getHand().score() >= KNOCK_SCORE)
 		{

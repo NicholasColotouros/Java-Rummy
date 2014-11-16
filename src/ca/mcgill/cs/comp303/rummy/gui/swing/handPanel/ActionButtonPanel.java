@@ -56,11 +56,7 @@ public class ActionButtonPanel extends JPanel
 					{
 						INSTANCE.drawFromDiscardPile(INSTANCE.getPlayer1());
 					}
-					catch (CannotDrawException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					catch (CannotDrawException e){}
 				}
 			}
 		});
