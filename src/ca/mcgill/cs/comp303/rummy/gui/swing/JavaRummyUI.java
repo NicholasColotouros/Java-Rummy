@@ -9,6 +9,7 @@ import ca.mcgill.cs.comp303.rummy.model.GameEngine;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -55,6 +56,7 @@ public class JavaRummyUI extends JFrame
 	// The panels used
 	private static final CardSelectionPanel PLAYER1_PANEL = new CardSelectionPanel(HAND_SIZE);
 	private static final HandPanel PLAYER2_PANEL = new HandPanel(HAND_SIZE);
+	private final ActionButtonPanel aActionPanel;
 	
 	private final DeckPanel aDeckPanel;
 	private final DeckPanel aDiscardPanel;
@@ -86,6 +88,8 @@ public class JavaRummyUI extends JFrame
 			p2Cards[i] = deck.draw();
 		}
 	
+		aActionPanel = new ActionButtonPanel(this, INSTANCE.getPhase());
+		
 		aDeckPanel = new DeckPanel(deck.size(), null);
 		aDiscardPanel = new DeckPanel(1, deck.draw()); // TODO change -- debugging only
 		addDeckActionListeners();
@@ -98,10 +102,22 @@ public class JavaRummyUI extends JFrame
 		PLAYER1_PANEL.loadCards(p1Cards);
 		PLAYER2_PANEL.updateHand(p2Cards);
 		
+		// make the bottom panel
+		// TODO: fix alignment
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new FlowLayout());
+		bottomPanel.add(PLAYER1_PANEL);
+		bottomPanel.add(aActionPanel);
+		
+		
+		// add everything to the window
 		add(PLAYER2_PANEL, BorderLayout.NORTH);
 		add(centerPanel, BorderLayout.CENTER);
-		add(PLAYER1_PANEL, BorderLayout.SOUTH);
+		add(bottomPanel, BorderLayout.SOUTH);
 
+		// set the background colors
+		bottomPanel.setBackground(BG_COLOR);
+		aActionPanel.setBackground(BG_COLOR);
 		PLAYER1_PANEL.setBackground(BG_COLOR);
 		PLAYER2_PANEL.setBackground(BG_COLOR);
 		aDeckPanel.setBackground(BG_COLOR);

@@ -1,6 +1,5 @@
 package ca.mcgill.cs.comp303.rummy.gui.swing;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
@@ -26,8 +25,6 @@ public class ActionButtonPanel extends JPanel
 	private static final ResourceBundle STRINGS = JavaRummyUI.STRINGS;
 	private static final GameEngine INSTANCE = GameEngine.getInstance();
 
-	private static final Dimension BUTTON_DIMENSION = new Dimension(200, 100);
-	
 	private static final JButton PASS_BUTTON = new JButton(STRINGS.getString("pass"));
 	private static final JButton DISCARD_BUTTON = new JButton(STRINGS.getString("discard"));
 	private static final JButton KNOCK_BUTTON = new JButton(STRINGS.getString("knock"));
@@ -93,10 +90,6 @@ public class ActionButtonPanel extends JPanel
 				// TODO: make the button faded when it's impossible to knock
 			}
 		});
-		
-		PASS_BUTTON.setPreferredSize(BUTTON_DIMENSION);
-		KNOCK_BUTTON.setPreferredSize(BUTTON_DIMENSION);
-		DISCARD_BUTTON.setPreferredSize(BUTTON_DIMENSION);
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
