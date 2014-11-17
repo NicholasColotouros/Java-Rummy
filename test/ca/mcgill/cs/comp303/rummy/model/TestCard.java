@@ -63,7 +63,10 @@ public class TestCard
 	@Test
 	public void testCompareTo()
 	{
-		assertTrue(aT1.compareTo(null) == -1);
+		assertTrue(aT1.compareTo(null) < 0);
 		assertTrue(aT1.compareTo(aT1) == 0);
+		assertTrue(aT1.compareTo(aT3) < 0);
+		assertTrue(aT3.compareTo(aT1) > 0);
+		assertTrue(aT3.compareTo(aT4) > 0);
 	}
 }
