@@ -26,21 +26,11 @@ public final class GameEngine extends Observable implements Serializable
 	private static GameEngine aGameInstance = new GameEngine();
 	
 	/**
-	 * 
-	 * Represents the different event that might occur.
-	 *
-	 */
-	public enum Event
-	{
-		RESET, DRAWFROMDECK, DRAWFROMDISCARDPILE, DISCARD
-	};
-	
-	/**
 	 * Represents the state of the game.  
 	 */
 	public enum GamePhase
 	{
-		FIRSTDRAW, DRAW, DISCARD, ENDGAME, AI
+		FIRSTDRAW, DRAW, DISCARD, ENDGAME, AI_TURN
 	};
 	
 	private GamePhase aPhase;
@@ -55,7 +45,32 @@ public final class GameEngine extends Observable implements Serializable
 	private GameEngine()
 	{
 		newGame("Player 1", "HAL 9000");
-		reset();
+	}
+	
+	/**
+	 * Starts a new game.
+	 * @param pP1Name Player 1s name
+	 * @param pP2Name Player 2s name
+	 * @pre p1 != null
+	 * @pre p2 != null
+	 */
+	public void newGame(String pP1Name, String pP2Name)
+	{
+		String p1 = pP1Name;
+		String p2 = pP2Name;
+		
+		if(p1.equals(""))
+		{
+			p1 = new String("Player 1");
+		}
+		if(p2.equals(""))
+		{
+			p2 = new String("HAL 9000");
+		}
+		
+		aPlayer1 = new Player(p1);
+		aPlayer2 = new Player(p2);
+		reset();		
 	}
 	
 	/**
@@ -91,32 +106,6 @@ public final class GameEngine extends Observable implements Serializable
 			}
 		}
 		aPhase = GamePhase.FIRSTDRAW;
-	}
-	
-	/**
-	 * Starts a new game.
-	 * @param pP1Name Player 1s name
-	 * @param pP2Name Player 2s name
-	 * @pre p1 != null
-	 * @pre p2 != null
-	 */
-	public void newGame(String pP1Name, String pP2Name)
-	{
-		String p1 = pP1Name;
-		String p2 = pP2Name;
-		
-		if(p1.equals(""))
-		{
-			p1 = new String("Player 1");
-		}
-		if(p2.equals(""))
-		{
-			p2 = new String("HAL 9000");
-		}
-		
-		aPlayer1 = new Player(p1);
-		aPlayer2 = new Player(p2);
-		reset();		
 	}
 	
 	/**
@@ -231,20 +220,20 @@ public final class GameEngine extends Observable implements Serializable
 		// If gin => round over
 		if(knockerScore == 0)
 		{
-			logWin(pPlayer, otherPlayer.getHand().score(), true);
+			recordWin(pPlayer, otherPlayer.getHand().score(), true);
 		}
 
 		
 		// if pPlayer won (the one who knocked)
 		else if(otherScore < knockerScore)
 		{
-			logWin(pPlayer, knockerScore - otherScore, false);
+			recordWin(pPlayer, knockerScore - otherScore, false);
 		}
 		
 		// if the other player won or draw
 		else
 		{
-			logWin(otherPlayer, otherScore - knockerScore, false);
+			recordWin(otherPlayer, otherScore - knockerScore, false);
 		}
 
 	}
@@ -256,7 +245,7 @@ public final class GameEngine extends Observable implements Serializable
 	 * @param pHasGin True if the winner has gin.
 	 * @pre pPointsGained >= 0
 	 */
-	private void logWin(Player pWinner, int pPointsGained, boolean pHasGin)
+	private void recordWin(Player pWinner, int pPointsGained, boolean pHasGin)
 	{
 		assert pPointsGained >= 0;		
 		pWinner.incrementScore(pPointsGained);
