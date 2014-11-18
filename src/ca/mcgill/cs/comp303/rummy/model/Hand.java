@@ -18,7 +18,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card.Rank;
  */
 public class Hand implements Serializable
 {
-	public static final int HAND_SIZE = 10;
+	public static final int HAND_SIZE = GameEngine.getHandSize();
 	private ArrayList<Card> aCards;
 	private ArrayList<Card> aUnmatched;
 	private ArrayList<ICardSet> aRuns;
@@ -43,6 +43,7 @@ public class Hand implements Serializable
 	 */
 	public void add( Card pCard )
 	{
+		aCards.add(pCard);
 		aUnmatched.add(pCard);
 	}
 	
@@ -57,6 +58,7 @@ public class Hand implements Serializable
 	{
 		aCards.remove(pCard);
 		aUnmatched.remove(pCard);
+		
 		// Remove any runs containing the card to remove.
 		ArrayList<ICardSet> runsToRemove = new ArrayList<ICardSet>();
 		for (ICardSet run : aRuns) 
@@ -70,6 +72,7 @@ public class Hand implements Serializable
 		{
 			aRuns.remove(run);
 		}
+		
 		// Remove any groups containing the card to remove.
 		ArrayList<ICardSet> groupsToRemove = new ArrayList<ICardSet>();
 		for (ICardSet group : aGroups) 
@@ -131,7 +134,7 @@ public class Hand implements Serializable
 	 */
 	public int size()
 	{
-		return this.aCards.size(); 
+		return aCards.size(); 
 	}
 	
 	/**
