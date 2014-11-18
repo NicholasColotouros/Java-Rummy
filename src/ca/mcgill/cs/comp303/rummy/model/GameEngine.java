@@ -114,19 +114,23 @@ public final class GameEngine extends Observable implements Serializable
 	 * @param pCard The card to be discarded.
 	 * @param pKnock whether or not a knock will happen afterwards.
 	 * @throws CannotPerformActionException if the card discarded is the card that was previously drawn.
-	 * @pre aPhase == GamePhase.DISCARD
 	 */
 	public void discard(Player pPlayer, Card pCard, boolean pKnock) throws CannotPerformActionException
-	{
-		assert aPhase == GamePhase.DISCARD;
-		
+	{		
 		if(pPlayer.discard(pCard)) 
 		{
 			aDiscardPile.push(pCard);
 		}
-		
+	
 		// Next phase is the draw phase
-		aPhase = GamePhase.DRAW;
+		if(aPhase == GamePhase.AI_TURN)
+		{
+			aPhase = GamePhase.DRAW;
+		}
+		else
+		{
+			aPhase = GamePhase.AI_TURN;
+		}
 		
 		if(pKnock)
 		{
@@ -137,12 +141,9 @@ public final class GameEngine extends Observable implements Serializable
 	/**
 	 * Takes a card from the deck and adds it to the specified players hand.
 	 * @param pPlayer the player to get the drawn card
-	 * @pre aPhase == GamePhase.DRAW
 	 */
 	public void drawFromDeck(Player pPlayer)
-	{
-		assert aPhase == GamePhase.DRAW;
-		
+	{		
 		try
 		{
 			pPlayer.addCard(aDeck.draw());
@@ -151,22 +152,25 @@ public final class GameEngine extends Observable implements Serializable
 		{
 		}
 		
-		if(aDeck.size() == 2)
+		if(aDeck.size() <= 2)
 		{
 			aPhase = GamePhase.ENDGAME;
+			// TODO: notify that deck ran out
 		}
-		aPhase = GamePhase.DISCARD;		
+		
+		if(aPhase == GamePhase.DRAW)
+		{
+			aPhase = GamePhase.DISCARD;
+		}
 	}
 	
 	/**
 	 * Takes a card from the discard pile and adds it to the specified players hand.
 	 * @param pPlayer the player to get the drawn card	 
 	 * @throws CannotDrawException when the discard pile is empty
-	 * @pre aPhase == GamePhase.DRAW
 	 */
 	public void drawFromDiscardPile(Player pPlayer) throws CannotDrawException
 	{
-		assert aPhase == GamePhase.DRAW;
 		Card tmp;
 		
 		if(aDiscardPile.isEmpty()) 
@@ -186,7 +190,10 @@ public final class GameEngine extends Observable implements Serializable
 		}
 
 		// Next phase is discard
-		aPhase = GamePhase.DISCARD;		
+		if(aPhase == GamePhase.DRAW)
+		{
+			aPhase = GamePhase.DISCARD;
+		} // else it's the AIs turn
 	}
 	
 	/**
