@@ -1,10 +1,12 @@
 package ca.mcgill.cs.comp303.rummy.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Set;
 import java.util.Stack;
 
+import ca.mcgill.cs.comp303.rummy.IJavaRummyObserver;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotDrawException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotKnockException;
 import ca.mcgill.cs.comp303.rummy.exceptions.CannotPerformActionException;
@@ -16,7 +18,7 @@ import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
 /**
  * The heart and soul of the game. Responsible for managing the game.
  */
-public final class GameEngine extends Observable implements Serializable
+public final class GameEngine implements Serializable
 {
 	public static final int KNOCK_SCORE = 10;
 	public static final int HAND_SIZE = 10;
@@ -41,6 +43,9 @@ public final class GameEngine extends Observable implements Serializable
 	// Player1 is the human by default
 	private Player aPlayer1;
 	private Player aPlayer2;
+	
+	// Observers
+	private ArrayList<IJavaRummyObserver> aObservers;
 	
 	private GameEngine()
 	{
@@ -304,6 +309,24 @@ public final class GameEngine extends Observable implements Serializable
 	}
 	
 	/**
+	 * Add an observer to the GameEngine.
+	 * @param pObserver the observer to be added.
+	 */
+	public void addObserver(IJavaRummyObserver pObserver)
+	{
+		aObservers.add(pObserver);
+	}
+	
+	/**
+	 * Remove and observer that is observing the game engine.
+	 * @param pObserver the observer to be removed.
+	 */
+	public void removeObserver(IJavaRummyObserver pObserver)
+	{
+		aObservers.remove(pObserver);
+	}
+	
+	/**
 	 * Get the current game phase.
 	 * @return the game phase.
 	 */
@@ -403,5 +426,10 @@ public final class GameEngine extends Observable implements Serializable
 		{
 			throw e;
 		}		
-	}	
+	}
+	
+	private void notifyObservers()
+	{
+		// TODO
+	}
 }
