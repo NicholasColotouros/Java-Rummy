@@ -18,10 +18,10 @@ import ca.mcgill.cs.comp303.rummy.serialization.Serializer;
  */
 public final class GameEngine extends Observable implements Serializable
 {
-	private static final long serialVersionUID = 3306656900603120034L;
+	public static final int KNOCK_SCORE = 10;
+	public static final int HAND_SIZE = 10;
 	
-	private static final int KNOCK_SCORE = 10;
-	private static final int HAND_SIZE = 10;
+	private static final long serialVersionUID = 3306656900603120034L;
 	
 	private static GameEngine aGameInstance = new GameEngine();
 	
@@ -359,15 +359,6 @@ public final class GameEngine extends Observable implements Serializable
 	public static GameEngine getInstance()
 	{
 		return aGameInstance;
-	}
-	
-	/**
-	 * Gets the size of each player's hand.
-	 * @return The hand size.
-	 */
-	public static int getHandSize()
-	{
-		return HAND_SIZE;
 	}
 	
 	/**

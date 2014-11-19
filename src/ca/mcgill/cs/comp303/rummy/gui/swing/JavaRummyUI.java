@@ -35,7 +35,7 @@ public class JavaRummyUI extends JFrame
 {
 	// Instance of Game Engine
 	public static final GameEngine INSTANCE = GameEngine.getInstance(); 
-	public static final int HAND_SIZE = GameEngine.getHandSize();
+	public static final int HAND_SIZE = GameEngine.HAND_SIZE;
 	
 	// Getting the strings to be used
 	public static final String RESOURCE_BUNDLE_NAME = "JavaRummyUIBundle";

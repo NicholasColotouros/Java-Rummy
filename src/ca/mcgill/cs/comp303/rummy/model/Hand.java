@@ -18,7 +18,7 @@ import ca.mcgill.cs.comp303.rummy.model.Card.Rank;
  */
 public class Hand implements Serializable
 {
-	public static final int HAND_SIZE = GameEngine.getHandSize();
+	public static final int HAND_SIZE = GameEngine.HAND_SIZE;
 	private ArrayList<Card> aCards;
 	private ArrayList<Card> aUnmatched;
 	private ArrayList<ICardSet> aRuns;
