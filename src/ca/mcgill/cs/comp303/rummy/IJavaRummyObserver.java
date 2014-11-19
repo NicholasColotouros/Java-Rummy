@@ -1,4 +1,4 @@
-package ca.mcgill.cs.comp303.rummy.logging;
+package ca.mcgill.cs.comp303.rummy;
 
 import ca.mcgill.cs.comp303.rummy.model.Card;
 import ca.mcgill.cs.comp303.rummy.model.GameEngine.GamePhase;

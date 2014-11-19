@@ -61,7 +61,6 @@ public class JavaRummyUI extends JFrame
 	private final DeckPanel aDeckPanel;
 	private final DeckPanel aDiscardPanel;
 	
-
 	/**
 	 * Default constructor.
 	 * @param pP1Name The name for Player 1
