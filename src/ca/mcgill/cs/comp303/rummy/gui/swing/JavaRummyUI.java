@@ -1,5 +1,7 @@
 package ca.mcgill.cs.comp303.rummy.gui.swing;
 
+import ca.mcgill.cs.comp303.rummy.bots.RandomBot;
+import ca.mcgill.cs.comp303.rummy.bots.RummyBot;
 import ca.mcgill.cs.comp303.rummy.gui.swing.handPanel.CardSelectionPanel;
 import ca.mcgill.cs.comp303.rummy.gui.swing.handPanel.HandPanel;
 import ca.mcgill.cs.comp303.rummy.model.Card;
@@ -239,11 +241,15 @@ public class JavaRummyUI extends JFrame
 	
 	public static void main(String[] pArgs)
 	{
-		SwingUtilities.invokeLater(new Runnable() {
+//		RummyBot computer = new RandomBot(GameEngine.getInstance().getPlayer2().getHand());
+//		GameEngine.getInstance().addObserver(computer);
+
+		SwingUtilities.invokeLater(new Runnable() 
+		{			
 			@Override
 			public void run() 
 			{
-				JavaRummyUI mainFrame = new JavaRummyUI("lol", "fag");
+				JavaRummyUI mainFrame = new JavaRummyUI("asdf", "fasdf");
 				mainFrame.setVisible(true);
 			}
 		});
